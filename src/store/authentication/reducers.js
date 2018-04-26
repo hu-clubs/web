@@ -11,15 +11,21 @@ const initialState = {
 export function authentication (state, action) {
   if (state === undefined) {
     return initialState;
+  } else if (state.authentication === undefined) {
+    return {
+      ...state,
+      initialState
+    };
   }
 
   switch (action.type) {
     case SET_JWT:
-      return Object.assign({}, state, {
+      return {
+        ...state,
         authentication: {
           jwt: action.jwt
         }
-      });
+      };
     default:
       return state;
   }

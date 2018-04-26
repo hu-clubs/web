@@ -1,18 +1,21 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
+import {Form, Text} from 'react-form';
+import * as classNames from 'classnames';
 
 class Login extends Component {
-  constructor (props) {
-    super(props);
-    this.state = {
-      email: '',
-      password: ''
-    };
-  }
+  validateEmail = value => {
+    let error;
+    if (!value) error = 'You must enter an email address';
+    if (!/[a-zA-Z0-9]+@harding.edu/.test(value)) error = 'You must enter a Harding email address';
+    return error;
+  };
 
-  handleSubmit () {
-    // make http request
-  }
+  validatePassword = value => {
+    let error;
+    if (!value) error = 'You must enter a password';
+    return error;
+  };
 
   render () {
     return (
@@ -21,36 +24,48 @@ class Login extends Component {
           <div className='columns'>
             <div className='column is-one-third is-offset-one-third'>
               <h1 className='title is-1'>Login</h1>
-              <form>
-                <div className='field'>
-                  <label className='label'>Harding Email</label>
-                  <div className='control'>
-                    <input className='input' type='text' placeholder='jdoe@harding.edu' />
-                  </div>
-                  <p className='help is-danger'>This isn't a Harding email address</p>
-                  <p className='help is-danger'>This email hasn't been registered</p>
-                </div>
-                <div className='field'>
-                  <label className='label'>Password</label>
-                  <div className='control'>
-                    <input className='input' type='password' />
-                  </div>
-                  <p className='help is-danger'>Invalid password</p>
-                </div>
-                <div className='field'>
-                  <div className='control'>
-                    <button className='button is-link'>Submit</button>
-                  </div>
-                </div>
-                <div className='field is-grouped'>
-                  <div className='control'>
-                    <Link className='button is-text' to='/register'>Don't have an account?</Link>
-                  </div>
-                  <div className='control'>
-                    <Link className='button is-text' to='/login/help'>Trouble logging in?</Link>
-                  </div>
-                </div>
-              </form>
+              <Form>
+                {formApi => (
+                  <form onSubmit={formApi.submitForm}>
+                    <div className='field'>
+                      <label className='label'>Harding Email</label>
+                      <div className='control'>
+                        <Text
+                          className={classNames({input: true, 'is-danger': formApi.errors && formApi.errors.email})}
+                          field='email'
+                          validate={this.validateEmail} />
+                      </div>
+                      {formApi.errors && (<p className='help is-danger'>{formApi.errors.email}</p>)}
+                    </div>
+                    <div className='field'>
+                      <label className='label'>Password</label>
+                      <div className='control'>
+                        <Text
+                          className={classNames({input: true, 'is-danger': formApi.errors && formApi.errors.password})}
+                          type='password'
+                          field='password'
+                          validate={this.validatePassword} />
+                      </div>
+                      {formApi.errors && (<p className='help is-danger'>{formApi.errors.password}</p>)}
+                    </div>
+                    <div className='field'>
+                      <div className='control'>
+                        <button className='button is-link'>Submit</button>
+                      </div>
+                    </div>
+                    <div className='field is-grouped'>
+                      <div className='control'>
+                        <Link className='button is-text'
+                          to='/register'>Don't have an account?</Link>
+                      </div>
+                      <div className='control'>
+                        <Link className='button is-text'
+                          to='/login/help'>Trouble logging in?</Link>
+                      </div>
+                    </div>
+                  </form>
+                )}
+              </Form>
             </div>
           </div>
         </div>

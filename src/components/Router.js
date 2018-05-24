@@ -5,9 +5,8 @@ import Login from './login/Login';
 import Register from './register/Register';
 import LoginHelp from './login/LoginHelp';
 import RegisterHelp from './register/RegisterHelp';
-// import ClubList from './club/List';
 import ReduxList from './club/ReduxList';
-import ClubDetails from './club/Details';
+import ReduxDetails from './club/ReduxDetails';
 
 class Router extends Component {
   render () {
@@ -20,7 +19,7 @@ class Router extends Component {
           <Route path='/register' exact component={Register} />
           <Route path='/register/help' exact component={RegisterHelp} />
           <Route path='/club/list' exact component={ReduxList} />
-          <Route path='/club/details' exact component={ClubDetails} />
+          <Route path='/club/details/:id' exact component={ReduxDetails} />
         </Switch>
       </div>
     );

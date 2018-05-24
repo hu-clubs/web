@@ -1,45 +1,39 @@
-import {SET_CLUBS, SET_CLUB} from './actions';
+import {combineReducers} from 'redux';
 
-// TODO implement reducer composition
-const initialState = {
-  clubs: {
-    clubs: {}
-  }
+import {REQUEST_CLUBS, RECEIVE_CLUBS, INVALIDATE_CLUBS} from './actions';
+
+let initialState = {
+  isFetching: false,
+  didInvalidate: false,
+  items: {}
 };
 
-// TODO implement reducer composition
-export function clubs (state, action) {
-  if (state === undefined) {
-    return initialState;
-  } else if (state.clubs === undefined) {
-    return {
-      ...state,
-      initialState
-    };
-  }
-
+export function clubListReducer (state = initialState, action) {
   switch (action.type) {
-    case SET_CLUBS:
-      let clubs = {};
-      for (let club of action.clubs) {
-        clubs[club.id] = club;
-      }
+    case INVALIDATE_CLUBS:
       return {
         ...state,
-        clubs: {
-          clubs: clubs
-        }
+        didInvalidate: true
       };
-    case SET_CLUB:
+    case REQUEST_CLUBS:
       return {
         ...state,
-        clubs: {
-          clubs: {
-            [action.club.id]: action.club
-          }
-        }
+        isFetching: true,
+        didInvalidate: false
+      };
+    case RECEIVE_CLUBS:
+      return {
+        ...state,
+        isFetching: false,
+        didInvalidate: false,
+        items: action.clubs,
+        lastUpdated: action.receivedAt
       };
     default:
       return state;
   }
 }
+
+export const clubReducer = combineReducers({
+  list: clubListReducer
+});

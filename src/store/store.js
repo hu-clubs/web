@@ -1,39 +1,14 @@
-import {createStore, combineReducers} from 'redux';
-import { authentication } from './authentication/reducers';
-import * as authenticationActions from './authentication/actions';
-import { clubs } from './club/reducers';
-import * as clubActions from './club/actions';
+import {createStore, applyMiddleware} from 'redux';
+import thunkMiddleware from 'redux-thunk';
+import {createLogger} from 'redux-logger';
 
-let reducers = combineReducers({
-  clubs,
-  authentication
-});
+import {rootReducer} from './reducers';
 
-const store = createStore(reducers);
+const loggerMiddleware = createLogger();
 
-// Log the initial state
-console.log(store.getState());
-
-// Every time the state changes, log it
-// Note that subscribe() returns a function for unregistering the listener
-const unsubscribe = store.subscribe(() =>
-  console.log(store.getState())
-);
-
-store.dispatch(authenticationActions.setJwt('1'));
-store.dispatch(authenticationActions.setJwt('2'));
-store.dispatch(authenticationActions.setJwt(''));
-store.dispatch(authenticationActions.setJwt('3'));
-
-store.dispatch(clubActions.setClubs([
-  {
-    id: '1',
-    name: 'Chi Sigma Alpha'
-  },
-  {
-    id: '2',
-    name: 'Sigma Phi Mu'
-  }
-]));
-
-unsubscribe();
+export const store = createStore(
+  rootReducer(),
+  applyMiddleware(
+    thunkMiddleware,
+    loggerMiddleware
+  ));

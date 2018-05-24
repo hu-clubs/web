@@ -1,35 +1,51 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import List from './List';
 import PropTypes from 'prop-types';
+import List from './List';
+import {fetchClubs} from '../../store/club/actions';
+import Loading from '../loading/Loading';
 
 class ReduxList extends Component {
   componentDidMount () {
-    // Do API request here
-    this.props.store.dispatch({
-      type: 'CLUB_LIST_API',
-      clubs: [
-        {
-          name: 'Chi Sigma Alpha'
-        }
-      ]
-    });
+    // TODO might be better to use events and map dispatch to props
+    this.props.dispatch(fetchClubs());
   }
 
   render () {
-    return <List clubs={this.props.clubs} />;
+    const {isFetching, clubs} = this.props;
+    return (
+      <div>
+        <section className='section'>
+          <div className='container'>
+            <div className='columns'>
+              <div className='column is-one-third is-offset-one-third'>
+                <h1 className='title is-1'>Club List</h1>
+                {isFetching && <Loading />}
+                {Object.keys(clubs).length > 0 && <List clubs={clubs} />}
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    );
   }
 }
 
-const mapStateToProps = function (store) {
+ReduxList.propTypes = {
+  isFetching: PropTypes.bool,
+  clubs: PropTypes.object,
+  dispatch: PropTypes.func.isRequired
+};
+
+export const mapStateToProps = function (state) {
   return {
-    clubs: store.userState.clubs
+    isFetching: state.clubs.list.isFetching,
+    didInvalidate: state.clubs.list.didInvalidate,
+    clubs: state.clubs.list.items,
+    lastUpdated: state.clubs.list.lastUpdated
   };
 };
 
-ReduxList.propTypes = {
-  clubs: PropTypes.array.required,
-  store: PropTypes.object.required
-};
-
-export default connect(mapStateToProps)(ReduxList);
+export default connect(
+  mapStateToProps
+)(ReduxList);

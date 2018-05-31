@@ -19,7 +19,7 @@ class Router extends Component {
           <Route path='/register' exact component={Register} />
           <Route path='/register/help' exact component={RegisterHelp} />
           <Route path='/club/list' exact component={ReduxList} />
-          <Route path='/club/details/:id' exact component={ReduxDetails} />
+          <Route path='/club/:id/details' exact component={ReduxDetails} />
         </Switch>
       </div>
     );

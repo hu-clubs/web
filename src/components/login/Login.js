@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 import {Form, Text} from 'react-form';
 import * as classNames from 'classnames';
+import fetch from 'cross-fetch';
 
 class Login extends Component {
   validateEmail = value => {
@@ -17,6 +18,30 @@ class Login extends Component {
     return error;
   };
 
+  onSubmit (values, e, formApi) {
+    console.log(values);
+    return fetch('http://localhost:8080/api/authentication/login', {
+      method: 'POST',
+      body: JSON.stringify({
+        email: values.email,
+        password: values.password
+      })
+    })
+      .then(res => {
+        if (!res.ok) {
+          throw Error(res);
+        }
+        return res;
+      })
+      .then(res => res.json())
+      .then(json => {
+        console.log(json);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  }
+
   render () {
     return (
       <section className='section'>
@@ -24,7 +49,7 @@ class Login extends Component {
           <div className='columns'>
             <div className='column is-one-third is-offset-one-third'>
               <h1 className='title is-1'>Login</h1>
-              <Form>
+              <Form onSubmit={this.onSubmit}>
                 {formApi => (
                   <form onSubmit={formApi.submitForm}>
                     <div className='field'>

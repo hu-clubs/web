@@ -1,11 +1,13 @@
 import {combineReducers} from 'redux';
 
-import {REQUEST_CLUBS, RECEIVE_CLUBS, INVALIDATE_CLUBS} from './actions';
+import {FETCH_CLUBS_BEGIN, FETCH_CLUBS_ERROR, FETCH_CLUBS_SUCCESS, INVALIDATE_CLUBS} from './actions';
 
 let initialState = {
   isFetching: false,
   didInvalidate: false,
-  items: {}
+  items: {},
+  lastUpdated: null,
+  error: {}
 };
 
 export function clubListReducer (state = initialState, action) {
@@ -15,19 +17,30 @@ export function clubListReducer (state = initialState, action) {
         ...state,
         didInvalidate: true
       };
-    case REQUEST_CLUBS:
+    case FETCH_CLUBS_BEGIN:
       return {
         ...state,
         isFetching: true,
-        didInvalidate: false
+        didInvalidate: false,
+        error: null
       };
-    case RECEIVE_CLUBS:
+    case FETCH_CLUBS_SUCCESS:
       return {
         ...state,
         isFetching: false,
         didInvalidate: false,
         items: action.clubs,
-        lastUpdated: action.receivedAt
+        lastUpdated: action.receivedAt,
+        error: null
+      };
+    case FETCH_CLUBS_ERROR:
+      return {
+        ...state,
+        isFetching: false,
+        didInvalidate: false,
+        items: {},
+        lastUpdated: action.receivedAt,
+        error: action.error
       };
     default:
       return state;

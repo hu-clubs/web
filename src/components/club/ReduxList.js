@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import List from './List';
 import {fetchClubs} from '../../store/club/actions';
 import Loading from '../loading/Loading';
+import Error from '../error/Error';
 
 class ReduxList extends Component {
   componentDidMount () {
@@ -12,7 +13,7 @@ class ReduxList extends Component {
   }
 
   render () {
-    const {isFetching, clubs} = this.props;
+    const {isFetching, clubs, error} = this.props;
     return (
       <div>
         <section className='section'>
@@ -20,8 +21,7 @@ class ReduxList extends Component {
             <div className='columns'>
               <div className='column is-one-third is-offset-one-third'>
                 <h1 className='title is-1'>Club List</h1>
-                {isFetching && <Loading />}
-                {Object.keys(clubs).length > 0 && <List clubs={clubs} />}
+                { isFetching ? <Loading /> : error ? <Error title={error.message} message={error.stack} /> : <List clubs={clubs} />}
               </div>
             </div>
           </div>
@@ -34,7 +34,8 @@ class ReduxList extends Component {
 ReduxList.propTypes = {
   isFetching: PropTypes.bool,
   clubs: PropTypes.object,
-  dispatch: PropTypes.func.isRequired
+  dispatch: PropTypes.func.isRequired,
+  error: PropTypes.object
 };
 
 export const mapStateToProps = function (state) {
@@ -42,7 +43,8 @@ export const mapStateToProps = function (state) {
     isFetching: state.clubs.list.isFetching,
     didInvalidate: state.clubs.list.didInvalidate,
     clubs: state.clubs.list.items,
-    lastUpdated: state.clubs.list.lastUpdated
+    lastUpdated: state.clubs.list.lastUpdated,
+    error: state.clubs.list.error
   };
 };
 

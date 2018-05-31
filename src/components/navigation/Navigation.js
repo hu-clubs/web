@@ -25,9 +25,9 @@ class App extends Component {
     return (
       <nav className='navbar is-light' role='navigation' aria-label='main navigation'>
         <div className='navbar-brand'>
-          <a className='navbar-item'>
+          <Link className='navbar-item' to='/'>
             Herd
-          </a>
+          </Link>
           <a role='button' className={'navbar-burger ' + (this.isNavbarMenuActive() ? 'is-active' : '')}
             aria-label='menu' aria-expanded='false' onClick={event => this.toggleNavbarMenuActive(event)}>
             <span aria-hidden='true' />

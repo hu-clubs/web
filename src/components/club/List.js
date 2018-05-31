@@ -7,10 +7,10 @@ class List extends Component {
     let clubListItems = Object.keys(this.props.clubs).map((key) => (
       <tr key={key}>
         <td>
-          <Link to={{pathname: '/club/details/' + this.props.clubs[key]._id}}>{this.props.clubs[key].name}</Link>
+          <Link to={{pathname: '/club/' + this.props.clubs[key]._id + '/details/'}}>{this.props.clubs[key].name}</Link>
         </td>
         <td>
-          1
+          { this.props.clubs[key].members.length }
         </td>
       </tr>
     ));

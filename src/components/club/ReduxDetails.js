@@ -9,7 +9,7 @@ import Details from '../club/Details';
 class ReduxDetails extends Component {
   componentDidMount () {
     // TODO might be better to use events and map dispatch to props
-    this.props.dispatch(fetchClubs());
+    this.props.dispatch(fetchClubs(this.props.jwt));
   }
 
   render () {
@@ -35,7 +35,8 @@ ReduxDetails.propTypes = {
   clubs: PropTypes.object,
   dispatch: PropTypes.func.isRequired,
   error: PropTypes.object,
-  match: PropTypes.object.isRequired
+  match: PropTypes.object.isRequired,
+  jwt: PropTypes.string
 };
 
 export const mapStateToProps = function (state) {
@@ -44,7 +45,8 @@ export const mapStateToProps = function (state) {
     didInvalidate: state.clubs.list.didInvalidate,
     clubs: state.clubs.list.items,
     lastUpdated: state.clubs.list.lastUpdated,
-    error: state.clubs.list.error
+    error: state.clubs.list.error,
+    jwt: state.authentication.jwt
   };
 };
 

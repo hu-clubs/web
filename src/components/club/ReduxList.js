@@ -9,7 +9,7 @@ import Error from '../error/Error';
 class ReduxList extends Component {
   componentDidMount () {
     // TODO might be better to use events and map dispatch to props
-    this.props.dispatch(fetchClubs());
+    this.props.dispatch(fetchClubs(this.props.jwt));
   }
 
   render () {
@@ -21,7 +21,7 @@ class ReduxList extends Component {
             <div className='columns'>
               <div className='column is-one-third is-offset-one-third'>
                 <h1 className='title is-1'>Club List</h1>
-                { isFetching ? <Loading /> : error ? <Error title={error.message} message={error.stack} /> : <List clubs={clubs} />}
+                { isFetching ? <Loading /> : error ? <Error title={error.title} message={error.message} /> : <List clubs={clubs} />}
               </div>
             </div>
           </div>
@@ -35,7 +35,8 @@ ReduxList.propTypes = {
   isFetching: PropTypes.bool,
   clubs: PropTypes.object,
   dispatch: PropTypes.func.isRequired,
-  error: PropTypes.object
+  error: PropTypes.object,
+  jwt: PropTypes.string
 };
 
 export const mapStateToProps = function (state) {
@@ -44,7 +45,8 @@ export const mapStateToProps = function (state) {
     didInvalidate: state.clubs.list.didInvalidate,
     clubs: state.clubs.list.items,
     lastUpdated: state.clubs.list.lastUpdated,
-    error: state.clubs.list.error
+    error: state.clubs.list.error,
+    jwt: state.authentication.authentication.jwt
   };
 };
 

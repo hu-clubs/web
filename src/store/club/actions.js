@@ -6,30 +6,32 @@ export const FETCH_CLUBS_ERROR = 'FETCH_CLUBS_ERROR';
 
 export const INVALIDATE_CLUBS = 'INVALIDATE_CLUBS';
 
-// TODO get auth from redux
-export function fetchClubs () {
+export function fetchClubs (jwt) {
   return function (dispatch) {
-    dispatch(fetchClubsBegin());
-    return fetch('http://localhost:8080/api/club', {
-      credentials: 'include',
-      headers: {
-        'Authorization': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiNWFkOGYyOGFjOTViZTc2ZTM4NWE3Y2VkIiwiaWF0IjoxNTI0MTkzNzYyLCJpc3MiOiJodS1jbHVicyJ9.b1jfa0ebpTAlaB7kYSMPsTlIujxXWwpVtKygp4tXcVA'
-      }
-    })
-      .then(res => {
+    (async function () {
+      try {
+        dispatch(fetchClubsBegin());
+        let res = await fetch('http://localhost:8080/api/club', {
+          credentials: 'include',
+          headers: {
+            'Authorization': jwt
+          }
+        });
+        let json = await res.json();
         if (!res.ok) {
-          throw Error(res);
+          console.log(res);
+          console.log(json);
+          dispatch(fetchClubsError({
+            title: res.status + ' ' + res.statusText,
+            message: json.error.name + ': ' + json.error.message
+          }));
+        } else {
+          dispatch(fetchClubsSuccess(json));
         }
-        return res;
-      })
-      .then(res => res.json())
-      .then(json => {
-        console.log(json);
-        dispatch(fetchClubsSuccess(json));
-      })
-      .catch(err => {
+      } catch (err) {
         dispatch(fetchClubsError(err));
-      });
+      }
+    })();
   };
 }
 

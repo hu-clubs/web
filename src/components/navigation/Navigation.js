@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
-import {Link} from 'react-router-dom';
+import {NavLink} from 'react-router-dom';
+import PropTypes from 'prop-types';
 
-class App extends Component {
+class Navigation extends Component {
   constructor (props) {
     super(props);
     this.state = {
@@ -21,13 +22,37 @@ class App extends Component {
     return this.state.isNavbarMenuActive;
   }
 
+  renderNavigationMenu () {
+    if (this.props.isLoggedIn) {
+      return (
+        <div className='navbar-end'>
+          <NavLink className='navbar-item' to='/club/list' activeClassName='is-active' exact>
+            Clubs
+          </NavLink>
+          <a className='navbar-item' onClick={this.props.onLogout}>Logout</a>
+        </div>
+      );
+    } else {
+      return (
+        <div className='navbar-end'>
+          <NavLink className='navbar-item' to='/login' activeClassName='is-active' exact>
+            Login
+          </NavLink>
+          <NavLink className='navbar-item' to='/register' activeClassName='is-active' exact>
+            Register
+          </NavLink>
+        </div>
+      );
+    }
+  }
+
   render () {
     return (
       <nav className='navbar is-light' role='navigation' aria-label='main navigation'>
         <div className='navbar-brand'>
-          <Link className='navbar-item' to='/'>
+          <NavLink className='navbar-item' to='/' activeClassName='is-active' exact>
             Herd
-          </Link>
+          </NavLink>
           <a role='button' className={'navbar-burger ' + (this.isNavbarMenuActive() ? 'is-active' : '')}
             aria-label='menu' aria-expanded='false' onClick={event => this.toggleNavbarMenuActive(event)}>
             <span aria-hidden='true' />
@@ -36,18 +61,16 @@ class App extends Component {
           </a>
         </div>
         <div className={'navbar-menu ' + (this.isNavbarMenuActive() ? 'is-active' : '')}>
-          <div className='navbar-end'>
-            <Link className='navbar-item' to='/login'>
-              Login
-            </Link>
-            <Link className='navbar-item' to='/register'>
-              Register
-            </Link>
-          </div>
+          {this.renderNavigationMenu()}
         </div>
       </nav>
     );
   }
 }
 
-export default App;
+Navigation.propTypes = {
+  isLoggedIn: PropTypes.bool.isRequired,
+  onLogout: PropTypes.func.isRequired
+};
+
+export default Navigation;

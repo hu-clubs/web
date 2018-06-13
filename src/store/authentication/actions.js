@@ -3,33 +3,42 @@ import fetch from 'cross-fetch';
 export const LOGIN_BEGIN = 'LOGIN_BEGIN';
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 export const LOGIN_ERROR = 'LOGIN_ERROR';
+export const LOGOUT = 'LOGOUT';
+
+export function logout () {
+  return {
+    type: LOGOUT
+  };
+}
 
 export function login (email, password) {
   return function (dispatch) {
-    dispatch(loginBegin());
-    return fetch('http://localhost:8080/api/authentication/login', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        email: email,
-        password: password
-      })
-    })
-      .then(res => {
+    (async function () {
+      dispatch(loginBegin());
+      try {
+        let res = await fetch('http://localhost:8080/api/authentication/login', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            email: email,
+            password: password
+          })
+        });
+        let json = await res.json();
         if (!res.ok) {
-          throw Error(res);
+          dispatch(loginError({
+            title: res.status + ' ' + res.statusText,
+            message: json.error.name + (json.error.message ? ': ' + json.error.message : '')
+          }));
+        } else {
+          dispatch(loginSuccess(json));
         }
-        return res;
-      })
-      .then(res => res.json())
-      .then(json => {
-        dispatch(loginSuccess(json));
-      })
-      .catch(err => {
+      } catch (err) {
         dispatch(loginError(err));
-      });
+      }
+    })();
   };
 }
 

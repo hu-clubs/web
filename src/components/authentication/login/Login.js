@@ -3,6 +3,7 @@ import {Link} from 'react-router-dom';
 import {Form, Text} from 'react-form';
 import * as classNames from 'classnames';
 import PropTypes from 'prop-types';
+import ErrorNotification from '../../error/ErrorNotification';
 
 class Login extends Component {
   validateEmail = value => {
@@ -25,7 +26,9 @@ class Login extends Component {
           <div className='columns'>
             <div className='column is-one-third is-offset-one-third'>
               <h1 className='title is-1'>Login</h1>
-              <Form onSubmit={this.props.onSubmit} defaultValues={{email: 'jshepherd@harding.edu', password: 'mypassword'}}>
+              {!this.props.isFetching && this.props.error && <ErrorNotification title={this.props.error.message} message={this.props.error.stack} />}
+              <Form onSubmit={this.props.onSubmit}
+                defaultValues={{email: 'jshepherd@harding.edu', password: 'mypassword'}}>
                 {formApi => (
                   <form onSubmit={formApi.submitForm}>
                     <div className='field'>
@@ -34,7 +37,8 @@ class Login extends Component {
                         <Text
                           className={classNames({input: true, 'is-danger': formApi.errors && formApi.errors.email})}
                           field='email'
-                          validate={this.validateEmail} />
+                          validate={this.validateEmail}
+                          autoComplete='username' />
                       </div>
                       {formApi.errors && (<p className='help is-danger'>{formApi.errors.email}</p>)}
                     </div>
@@ -42,10 +46,14 @@ class Login extends Component {
                       <label className='label'>Password</label>
                       <div className='control'>
                         <Text
-                          className={classNames({input: true, 'is-danger': formApi.errors && formApi.errors.password})}
+                          className={classNames({
+                            input: true,
+                            'is-danger': formApi.errors && formApi.errors.password
+                          })}
                           type='password'
                           field='password'
-                          validate={this.validatePassword} />
+                          validate={this.validatePassword}
+                          autoComplete='password' />
                       </div>
                       {formApi.errors && (<p className='help is-danger'>{formApi.errors.password}</p>)}
                     </div>
@@ -76,7 +84,9 @@ class Login extends Component {
 }
 
 Login.propTypes = {
-  onSubmit: PropTypes.func.isRequired
+  onSubmit: PropTypes.func.isRequired,
+  error: PropTypes.object,
+  isFetching: PropTypes.bool
 };
 
 export default Login;

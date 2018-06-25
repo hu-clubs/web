@@ -3,7 +3,7 @@ import {Link} from 'react-router-dom';
 import {Form, Text} from 'react-form';
 import * as classNames from 'classnames';
 import PropTypes from 'prop-types';
-import ErrorNotification from '../../error/ErrorNotification';
+import ErrorNotification from '../../../shared/error/ErrorNotification';
 
 class Login extends Component {
   validateEmail = value => {

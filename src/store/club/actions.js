@@ -1,4 +1,4 @@
-import fetch from 'cross-fetch';
+import * as api from '../../api/static';
 
 export const FETCH_CLUBS_BEGIN = 'FETCH_CLUBS_BEGIN';
 export const FETCH_CLUBS_SUCCESS = 'FETCH_CLUBS_SUCCESS';
@@ -11,21 +11,8 @@ export function fetchClubs () {
     (async function () {
       dispatch(fetchClubsBegin());
       try {
-        let res = await fetch('http://localhost:8080/api/club', {
-          credentials: 'include',
-          headers: {
-            'Authorization': getState().authentication.authentication.jwt
-          }
-        });
-        let json = await res.json();
-        if (!res.ok) {
-          dispatch(fetchClubsError({
-            title: res.status + ' ' + res.statusText,
-            message: json.error.name + ': ' + json.error.message
-          }));
-        } else {
-          dispatch(fetchClubsSuccess(json));
-        }
+        let clubs = await api.getClubs(getState().authentication.authentication.jwt);
+        dispatch(fetchClubsSuccess(clubs));
       } catch (err) {
         dispatch(fetchClubsError(err));
       }

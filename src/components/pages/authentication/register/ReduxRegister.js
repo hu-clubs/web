@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
-import Login from './Login';
-import {login} from '../../../store/authentication/actions';
+import Register from './Register';
+import {register} from '../../../../store/authentication/actions';
 
 const mapStateToProps = function (state) {
   return {
@@ -12,7 +12,7 @@ const mapStateToProps = function (state) {
 const mapDispatchToProps = function (dispatch) {
   return {
     onSubmit: (values, e, formApi) => {
-      dispatch(login(values.email, values.password));
+      dispatch(register(values.email, values.password));
     }
   };
 };
@@ -20,6 +20,6 @@ const mapDispatchToProps = function (dispatch) {
 const ReduxLogin = connect(
   mapStateToProps,
   mapDispatchToProps
-)(Login);
+)(Register);
 
 export default ReduxLogin;

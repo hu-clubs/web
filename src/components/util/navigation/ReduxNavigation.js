@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import Navigation from './Navigation';
-import {logout} from '../../store/authentication/actions';
+import {logout} from '../../../store/authentication/actions';
 
 const mapStateToProps = (state) => {
   return {

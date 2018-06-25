@@ -1,6 +1,6 @@
 import {connect} from 'react-redux';
 import LoadingDetails from './LoadingDetails';
-import {fetchClubs} from '../../../store/club/actions';
+import {fetchClubs} from '../../../../store/club/actions';
 
 const mapStateToProps = function (state) {
   return {

@@ -2,9 +2,9 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 import List from './List';
-import {fetchClubs} from '../../../store/club/actions';
-import Loading from '../../loading/Loading';
-import ErrorNotification from '../../error/ErrorNotification';
+import {fetchClubs} from '../../../../store/club/actions';
+import Loading from '../../../shared/loading/Loading';
+import ErrorNotification from '../../../shared/error/ErrorNotification';
 
 class ReduxList extends Component {
   componentDidMount () {

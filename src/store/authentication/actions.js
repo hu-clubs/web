@@ -1,8 +1,13 @@
-import fetch from 'cross-fetch';
+import * as api from '../../api/static';
 
 export const LOGIN_BEGIN = 'LOGIN_BEGIN';
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 export const LOGIN_ERROR = 'LOGIN_ERROR';
+
+export const REGISTER_BEGIN = 'REGISTER_BEGIN';
+export const REGISTER_SUCCESS = 'REGISTER_SUCCESS';
+export const REGISTER_ERROR = 'REGISTER_ERROR';
+
 export const LOGOUT = 'LOGOUT';
 
 export function logout () {
@@ -16,25 +21,8 @@ export function login (email, password) {
     (async function () {
       dispatch(loginBegin());
       try {
-        let res = await fetch('http://localhost:8080/api/authentication/login', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({
-            email: email,
-            password: password
-          })
-        });
-        let json = await res.json();
-        if (!res.ok) {
-          dispatch(loginError({
-            title: res.status + ' ' + res.statusText,
-            message: json.error.name + (json.error.message ? ': ' + json.error.message : '')
-          }));
-        } else {
-          dispatch(loginSuccess(json));
-        }
+        let jwt = await api.login(email, password);
+        dispatch(loginSuccess(jwt));
       } catch (err) {
         dispatch(loginError(err));
       }
@@ -58,6 +46,40 @@ export function loginSuccess (json) {
 export function loginError (json) {
   return {
     type: LOGIN_ERROR,
+    error: json
+  };
+}
+
+export function register (email, password) {
+  return function (dispatch) {
+    (async function () {
+      dispatch(registerBegin());
+      try {
+        let jwt = api.login(email, password);
+        dispatch(registerSuccess(jwt));
+      } catch (err) {
+        dispatch(registerError(err));
+      }
+    })();
+  };
+}
+
+export function registerBegin () {
+  return {
+    type: REGISTER_BEGIN
+  };
+}
+
+export function registerSuccess (json) {
+  return {
+    type: REGISTER_SUCCESS,
+    jwt: json.token
+  };
+}
+
+export function registerError (json) {
+  return {
+    type: REGISTER_ERROR,
     error: json
   };
 }

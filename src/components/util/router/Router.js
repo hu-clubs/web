@@ -1,13 +1,13 @@
 import React, {Component} from 'react';
 import {Switch, Route, Redirect} from 'react-router-dom';
-import Home from '../home/Home';
-import Register from '../authentication/register/Register';
-import LoginHelp from '../authentication/login/LoginHelp';
-import RegisterHelp from '../authentication/register/RegisterHelp';
-import ReduxList from '../club/list/ReduxList';
-import ReduxDetails from '../club/details/ReduxDetails';
-import ReduxLogin from '../authentication/login/ReduxLogin';
-import ErrorPage from '../error/ErrorPage';
+import Home from '../../pages/home/Home';
+import Register from '../../pages/authentication/register/Register';
+import LoginHelp from '../../pages/authentication/login/LoginHelp';
+import RegisterHelp from '../../pages/authentication/register/RegisterHelp';
+import ReduxList from '../../pages/club/list/ReduxList';
+import ReduxDetails from '../../pages/club/details/ReduxDetails';
+import ReduxLogin from '../../pages/authentication/login/ReduxLogin';
+import ErrorPage from '../../pages/ErrorPage';
 import PropTypes from 'prop-types';
 
 class Router extends Component {

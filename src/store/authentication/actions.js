@@ -1,4 +1,4 @@
-import * as api from '../../api/static';
+import * as api from '../../api/rest';
 
 export const LOGIN_BEGIN = 'LOGIN_BEGIN';
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';

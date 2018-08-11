@@ -26,7 +26,7 @@ class Login extends Component {
           <div className='columns'>
             <div className='column is-one-third is-offset-one-third'>
               <h1 className='title is-1'>Login</h1>
-              {!this.props.isFetching && this.props.error && <ErrorNotification title={this.props.error.message} message={this.props.error.stack} />}
+              {!this.props.isFetching && this.props.error && <ErrorNotification title={this.props.error.name} message={this.props.error.message} stack={this.props.error.stack} />}
               <Form onSubmit={this.props.onSubmit}
                 defaultValues={{email: 'jshepherd@harding.edu', password: 'mypassword'}}>
                 {formApi => (

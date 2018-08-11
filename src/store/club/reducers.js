@@ -1,8 +1,15 @@
 import {combineReducers} from 'redux';
 
-import {FETCH_CLUBS_BEGIN, FETCH_CLUBS_ERROR, FETCH_CLUBS_SUCCESS, INVALIDATE_CLUBS} from './actions';
+import {
+  FETCH_CLUBS_BEGIN, FETCH_CLUBS_ERROR, FETCH_CLUBS_SUCCESS, INVALIDATE_CLUBS,
+  FETCH_CLUB_BEGIN, FETCH_CLUB_ERROR, FETCH_CLUB_SUCCESS, INVALIDATE_CLUB
+} from './actions';
 
-let initialState = {
+let initialDetailsState = {
+  items: {}
+};
+
+let initialListState = {
   isFetching: false,
   didInvalidate: false,
   items: {},
@@ -10,7 +17,49 @@ let initialState = {
   error: {}
 };
 
-export function clubListReducer (state = initialState, action) {
+export function clubDetailsReducer (state = initialDetailsState, action) {
+  let clubId = action.clubId;
+  switch (action.type) {
+    case INVALIDATE_CLUB:
+      let newState = Object.assign({}, state);
+      newState.items[clubId] = {
+        didInvalidate: true
+      };
+      return newState;
+    case FETCH_CLUB_BEGIN:
+      newState = Object.assign({}, state);
+      newState.items[clubId] = {
+        isFetching: true,
+        didInvalidate: false,
+        error: null
+      };
+      return newState;
+    case FETCH_CLUB_SUCCESS:
+      newState = Object.assign({}, state);
+      newState.items[clubId] = {
+        isFetching: false,
+        didInvalidate: false,
+        data: action.club,
+        lastUpdated: action.receivedAt,
+        error: null
+      };
+      return newState;
+    case FETCH_CLUB_ERROR:
+      newState = Object.assign({}, state);
+      newState.items[clubId] = {
+        isFetching: false,
+        didInvalidate: false,
+        data: {},
+        lastUpdated: action.receivedAt,
+        error: action.error
+      };
+      return newState;
+    default:
+      return state;
+  }
+}
+
+export function clubListReducer (state = initialListState, action) {
   switch (action.type) {
     case INVALIDATE_CLUBS:
       return {
@@ -48,5 +97,6 @@ export function clubListReducer (state = initialState, action) {
 }
 
 export const clubReducer = combineReducers({
-  list: clubListReducer
+  list: clubListReducer,
+  details: clubDetailsReducer
 });

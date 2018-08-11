@@ -4,13 +4,16 @@ import PropTypes from 'prop-types';
 
 class List extends Component {
   render () {
+    console.log(this.props.users);
     let userListItems = Object.keys(this.props.users).map((key) => (
       <tr key={key}>
         <td>
-          { this.props.users[key].firstName + ' ' + this.props.users[key].lastName }
+          <Link
+            to={{pathname: '/user/' + this.props.users[key]._id + '/details/'}}>{this.props.users[key].firstName + ' ' + this.props.users[key].lastName}
+          </Link>
         </td>
         <td>
-          <Link to={{pathname: '/user/' + this.props.users[key]._id + '/details/'}}>{this.props.users[key].email}</Link>
+          <a href={'mailto:' + this.props.users[key].email}>{this.props.users[key].email}</a>
         </td>
       </tr>
     ));

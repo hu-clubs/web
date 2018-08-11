@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 class List extends Component {
   render () {
-    let clubListItems = Object.keys(this.props.clubs).map((key) => (
+    let clubs = Object.keys(this.props.clubs).map((key) => (
       <tr key={key}>
         <td>
           <Link to={{pathname: '/club/' + this.props.clubs[key]._id + '/details/'}}>{this.props.clubs[key].name}</Link>
@@ -23,7 +23,7 @@ class List extends Component {
           </tr>
         </thead>
         <tbody>
-          {clubListItems}
+          {clubs}
         </tbody>
       </table>
     );

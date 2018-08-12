@@ -11,7 +11,7 @@ class Home extends Component {
               Herd
             </h1>
             <h2 className='subtitle'>
-              Manage club members and meetings
+              Make social clubs easier
             </h2>
           </div>
         </div>

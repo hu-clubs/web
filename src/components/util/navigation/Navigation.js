@@ -29,7 +29,17 @@ class Navigation extends Component {
           <NavLink className='navbar-item' to='/club/list' activeClassName='is-active' exact>
             Clubs
           </NavLink>
-          <a className='navbar-item' onClick={this.props.onLogout}>Logout</a>
+          <div className='navbar-item has-dropdown is-hoverable'>
+            <NavLink className='navbar-link' to='/user/' activeClassName='is-active' exact>
+              Jerred Shepherd
+            </NavLink>
+            <div className='navbar-dropdown is-right'>
+              <NavLink className='navbar-item' to='/user/' activeClassName='is-active' exact>
+                My Account
+              </NavLink>
+              <a className='navbar-item' onClick={this.props.onLogout}>Logout</a>
+            </div>
+          </div>
         </div>
       );
     } else {

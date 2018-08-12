@@ -4,21 +4,9 @@ import {Form, Text} from 'react-form';
 import * as classNames from 'classnames';
 import PropTypes from 'prop-types';
 import ErrorNotification from '../../../shared/error/ErrorNotification';
+import {validateEmail, validatePassword} from '../../../../validators';
 
 class Login extends Component {
-  validateEmail = value => {
-    let error;
-    if (!value) error = 'You must enter an email address';
-    if (!/[a-zA-Z0-9]+@harding.edu/.test(value)) error = 'You must enter a Harding email address';
-    return error;
-  };
-
-  validatePassword = value => {
-    let error;
-    if (!value) error = 'You must enter a password';
-    return error;
-  };
-
   render () {
     return (
       <section className='section'>
@@ -37,7 +25,7 @@ class Login extends Component {
                         <Text
                           className={classNames({input: true, 'is-danger': formApi.errors && formApi.errors.email})}
                           field='email'
-                          validate={this.validateEmail}
+                          validate={validateEmail}
                           autoComplete='username' />
                       </div>
                       {formApi.errors && (<p className='help is-danger'>{formApi.errors.email}</p>)}
@@ -52,7 +40,7 @@ class Login extends Component {
                           })}
                           type='password'
                           field='password'
-                          validate={this.validatePassword}
+                          validate={validatePassword}
                           autoComplete='password' />
                       </div>
                       {formApi.errors && (<p className='help is-danger'>{formApi.errors.password}</p>)}

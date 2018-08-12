@@ -8,6 +8,8 @@ class Footer extends Component {
           <div className='content has-text-centered'>
             <p>
               <strong>Herd</strong> by <a href='https://shepherdjerred.com/'>Jerred Shepherd</a>.
+              <br />
+              <a href='mailto:shepherdjerred@gmail.com'>Contact Me</a>
             </p>
           </div>
         </div>

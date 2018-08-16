@@ -1,10 +1,10 @@
-import React, {Component} from 'react';
-import {Link} from 'react-router-dom';
-import {Form, Text} from 'react-form';
 import * as classNames from 'classnames';
 import PropTypes from 'prop-types';
-import ErrorNotification from '../../../shared/error/ErrorNotification';
+import React, {Component} from 'react';
+import {Form, Text} from 'react-form';
+import {Link} from 'react-router-dom';
 import {validateEmail, validatePassword} from '../../../../validators';
+import ErrorNotification from '../../../util/errorNotification/ErrorNotification';
 
 class Login extends Component {
   render () {

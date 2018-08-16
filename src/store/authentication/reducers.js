@@ -1,13 +1,42 @@
-import {LOGIN_BEGIN, LOGIN_ERROR, LOGIN_SUCCESS, LOGOUT} from './actions';
 import {combineReducers} from 'redux';
+import {LOGIN_BEGIN, LOGIN_ERROR, LOGIN_SUCCESS, SET_JWT} from './actions';
 
-const initialState = {
-  isFetching: false,
+const initialJwtState = {
   jwt: '',
+  firstName: '',
+  lastName: '',
+  email: '',
+  id: '',
   isLoggedIn: false
 };
 
-export function loginReducer (state = initialState, action) {
+const initialLoginState = {
+  isFetching: false,
+  error: null
+};
+
+export function jwtReducer (state = initialJwtState, action) {
+  switch (action.type) {
+    case SET_JWT:
+      if (action.jwt) {
+        return {
+          ...state,
+          jwt: action.jwt,
+          firstName: action.firstName,
+          lastName: action.lastName,
+          email: action.email,
+          id: action.id,
+          isLoggedIn: true
+        };
+      } else {
+        return initialJwtState;
+      }
+    default:
+      return state;
+  }
+}
+
+export function loginReducer (state = initialLoginState, action) {
   switch (action.type) {
     case LOGIN_BEGIN:
       return {
@@ -17,9 +46,7 @@ export function loginReducer (state = initialState, action) {
     case LOGIN_SUCCESS:
       return {
         ...state,
-        isFetching: false,
-        jwt: action.jwt,
-        isLoggedIn: true
+        isFetching: false
       };
     case LOGIN_ERROR:
       return {
@@ -27,17 +54,12 @@ export function loginReducer (state = initialState, action) {
         isFetching: false,
         error: action.error
       };
-    case LOGOUT:
-      return {
-        ...state,
-        jwt: null,
-        isLoggedIn: false
-      };
     default:
       return state;
   }
 }
 
 export const authenticationReducer = combineReducers({
-  authentication: loginReducer
+  login: loginReducer,
+  jwt: jwtReducer
 });

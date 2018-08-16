@@ -1,6 +1,6 @@
+import PropTypes from 'prop-types';
 import React, {Component} from 'react';
 import {NavLink} from 'react-router-dom';
-import PropTypes from 'prop-types';
 
 class Navigation extends Component {
   constructor (props) {
@@ -30,11 +30,11 @@ class Navigation extends Component {
             Clubs
           </NavLink>
           <div className='navbar-item has-dropdown is-hoverable'>
-            <NavLink className='navbar-link' to='/user/' activeClassName='is-active' exact>
-              Jerred Shepherd
+            <NavLink className='navbar-link' to={'/user/' + this.props.id + '/details'} activeClassName='is-active' exact>
+              {this.props.firstName} {this.props.lastName}
             </NavLink>
             <div className='navbar-dropdown is-right'>
-              <NavLink className='navbar-item' to='/user/' activeClassName='is-active' exact>
+              <NavLink className='navbar-item' to={'/user/' + this.props.id + '/details'} activeClassName='is-active' exact>
                 My Account
               </NavLink>
               <a className='navbar-item' onClick={this.props.onLogout}>Logout</a>
@@ -79,6 +79,9 @@ class Navigation extends Component {
 }
 
 Navigation.propTypes = {
+  firstName: PropTypes.string,
+  lastName: PropTypes.string,
+  id: PropTypes.string,
   isLoggedIn: PropTypes.bool.isRequired,
   onLogout: PropTypes.func.isRequired
 };

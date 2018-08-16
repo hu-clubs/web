@@ -1,24 +1,24 @@
-import React from 'react';
-import Loading from '../../shared/loading/Loading';
-import ErrorNotification from '../../shared/error/ErrorNotification';
 import PropTypes from 'prop-types';
+import React from 'react';
+import ErrorNotification from '../errorNotification/ErrorNotification';
+import LoadingIndicator from '../loadingIndicator/LoadingIndicator';
 
 function WithLoading (WrappedComponent) {
-  let WithLoadingComponent = function ({ isFetching, error = true, ...props }) {
+  let ComponentWithLoading = function ({ isFetching, error = true, ...props }) {
     return (
       isFetching
-        ? <Loading /> : error
+        ? <LoadingIndicator /> : error
           ? <ErrorNotification title={error.name} message={error.message} />
           : <WrappedComponent {...props} />
     );
   };
 
-  WithLoadingComponent.propTypes = {
+  ComponentWithLoading.propTypes = {
     isFetching: PropTypes.bool.isRequired,
     error: PropTypes.object
   };
 
-  return WithLoadingComponent;
+  return ComponentWithLoading;
 }
 
 export default WithLoading;

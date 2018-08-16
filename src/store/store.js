@@ -1,14 +1,14 @@
 import {applyMiddleware, compose, createStore} from 'redux';
-import reduxThunk from 'redux-thunk';
-import {createLogger} from 'redux-logger';
 import persistState, {mergePersistedState} from 'redux-localstorage';
-import adapter from 'redux-localstorage/lib/adapters/localStorage';
 import filter from 'redux-localstorage-filter';
+import adapter from 'redux-localstorage/lib/adapters/localStorage';
+import {createLogger} from 'redux-logger';
+import reduxThunk from 'redux-thunk';
 
 import {rootReducer} from './reducers';
 
 const storage = compose(
-  filter(['authentication.authentication.jwt', 'authentication.authentication.isLoggedIn'])
+  filter(['authentication.jwt'])
 )(adapter(
   window.localStorage
 ));

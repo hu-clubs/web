@@ -1,11 +1,11 @@
-import { connect } from 'react-redux';
-import Login from './Login';
+import {connect} from 'react-redux';
 import {login} from '../../../../store/authentication/actions';
+import Login from './Login';
 
 const mapStateToProps = function (state) {
   return {
-    isFetching: state.authentication.authentication.isFetching,
-    error: state.authentication.authentication.error
+    isFetching: state.authentication.jwt.isFetching,
+    error: state.authentication.jwt.error
   };
 };
 

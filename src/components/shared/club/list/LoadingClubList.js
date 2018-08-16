@@ -1,11 +1,11 @@
-import WithLoading from '../../../util/loading/WithLoading';
-import List from './List';
 import PropTypes from 'prop-types';
 import React, {Component} from 'react';
+import WithLoading from '../../../util/loading/WithLoading';
+import ClubList from './ClubList';
 
-const ListWithLoading = WithLoading(List);
+const ListWithLoading = WithLoading(ClubList);
 
-class LoadingList extends Component {
+class LoadingClubList extends Component {
   componentDidMount () {
     this.props.onFetchClubs();
   }
@@ -17,11 +17,11 @@ class LoadingList extends Component {
   }
 }
 
-LoadingList.propTypes = {
+LoadingClubList.propTypes = {
   isFetching: PropTypes.bool,
   error: PropTypes.object,
   clubs: PropTypes.object.isRequired,
   onFetchClubs: PropTypes.func.isRequired
 };
 
-export default LoadingList;
+export default LoadingClubList;

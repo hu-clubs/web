@@ -1,9 +1,28 @@
 import {combineReducers} from 'redux';
 
 import {
-  FETCH_CLUBS_BEGIN, FETCH_CLUBS_ERROR, FETCH_CLUBS_SUCCESS, INVALIDATE_CLUBS,
-  FETCH_CLUB_BEGIN, FETCH_CLUB_ERROR, FETCH_CLUB_SUCCESS, INVALIDATE_CLUB
+  CREATE_CLUB_BEGIN,
+  CREATE_CLUB_ERROR,
+  CREATE_CLUB_SUCCESS, DELETE_CLUB_BEGIN, DELETE_CLUB_ERROR, DELETE_CLUB_SUCCESS,
+  FETCH_CLUB_BEGIN,
+  FETCH_CLUB_ERROR,
+  FETCH_CLUB_SUCCESS,
+  FETCH_CLUBS_BEGIN,
+  FETCH_CLUBS_ERROR,
+  FETCH_CLUBS_SUCCESS,
+  INVALIDATE_CLUB,
+  INVALIDATE_CLUBS
 } from './actions';
+
+let initialDeleteState = {
+  isFetching: false,
+  error: null
+};
+
+let initialCreateState = {
+  isFetching: false,
+  error: null
+};
 
 let initialDetailsState = {
   items: {}
@@ -14,8 +33,52 @@ let initialListState = {
   didInvalidate: false,
   items: {},
   lastUpdated: null,
-  error: {}
+  error: null
 };
+
+export function deleteClubReducer (state = initialDeleteState, action) {
+  switch (action.type) {
+    case DELETE_CLUB_BEGIN:
+      return {
+        isFetching: true,
+        error: {}
+      };
+    case DELETE_CLUB_SUCCESS:
+      return {
+        isFetching: false,
+        error: {}
+      };
+    case DELETE_CLUB_ERROR:
+      return {
+        isFetching: false,
+        error: action.error
+      };
+    default:
+      return state;
+  }
+}
+
+export function createClubReducer (state = initialCreateState, action) {
+  switch (action.type) {
+    case CREATE_CLUB_BEGIN:
+      return {
+        isFetching: true,
+        error: {}
+      };
+    case CREATE_CLUB_SUCCESS:
+      return {
+        isFetching: false,
+        error: {}
+      };
+    case CREATE_CLUB_ERROR:
+      return {
+        isFetching: false,
+        error: action.error
+      };
+    default:
+      return state;
+  }
+}
 
 export function clubDetailsReducer (state = initialDetailsState, action) {
   let clubId = action.clubId;
@@ -98,5 +161,7 @@ export function clubListReducer (state = initialListState, action) {
 
 export const clubReducer = combineReducers({
   list: clubListReducer,
-  details: clubDetailsReducer
+  details: clubDetailsReducer,
+  create: createClubReducer,
+  delete: deleteClubReducer
 });

@@ -1,14 +1,17 @@
-import React, {Component} from 'react';
-import {Switch, Route, Redirect} from 'react-router-dom';
-import Home from '../../pages/home/Home';
-import ReduxRegister from '../../pages/authentication/register/ReduxRegister';
-import LoginHelp from '../../pages/authentication/login/LoginHelp';
-import RegisterHelp from '../../pages/authentication/register/RegisterHelp';
-import ClubList from '../../pages/club/List';
-import ClubReduxDetails from '../../pages/club/details/ReduxDetails';
-import ReduxLogin from '../../pages/authentication/login/ReduxLogin';
-import ErrorPage from '../../pages/ErrorPage';
 import PropTypes from 'prop-types';
+import React, {Component} from 'react';
+import {Redirect, Route, Switch} from 'react-router-dom';
+import ReduxLogin from '../../pages/authentication/login/ReduxLogin';
+import LoginHelp from '../../pages/authentication/loginHelp/LoginHelp';
+import ReduxRegister from '../../pages/authentication/register/ReduxRegister';
+import RegisterHelp from '../../pages/authentication/registerHelp/RegisterHelp';
+import ClubDetails from '../../pages/club/ClubDetails';
+import ClubList from '../../pages/club/ClubList';
+import ReduxCreateClub from '../../pages/club/createClub/ReduxCreateClub';
+import DeleteClub from '../../pages/club/DeleteClub';
+import ErrorPage from '../../pages/ErrorPage';
+import Home from '../../pages/home/Home';
+import UserDetails from '../../pages/user/UserDetails';
 import ErrorBoundary from '../ErrorBoundary';
 
 class Router extends Component {
@@ -51,9 +54,27 @@ class Router extends Component {
               }}
             />
 
-            <Route path='/club/:id/details' exact
+            <Route path='/club/:id/details'
               render={(props) => {
-                return this.isLoggedIn() ? <ClubReduxDetails {...props} /> : <ReduxLogin />;
+                return this.isLoggedIn() ? <ClubDetails {...props} /> : <ReduxLogin />;
+              }}
+            />
+
+            <Route path='/club/:id/delete'
+              render={(props) => {
+                return this.isLoggedIn() ? <DeleteClub {...props} /> : <ReduxLogin />;
+              }}
+            />
+
+            <Route path='/club/create'
+              render={(props) => {
+                return this.isLoggedIn() ? <ReduxCreateClub {...props} /> : <ReduxLogin />;
+              }}
+            />
+
+            <Route path='/user/:id/details'
+              render={(props) => {
+                return this.isLoggedIn() ? <UserDetails {...props} /> : <ReduxLogin />;
               }}
             />
 

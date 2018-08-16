@@ -1,18 +1,18 @@
-import { connect } from 'react-redux';
+import {connect} from 'react-redux';
+import {createUser} from '../../../../store/user/actions';
 import Register from './Register';
-import {register} from '../../../../store/authentication/actions';
 
 const mapStateToProps = function (state) {
   return {
-    isFetching: state.authentication.authentication.isFetching,
-    error: state.authentication.authentication.error
+    isFetching: state.users.create.isFetching,
+    error: state.users.create.error
   };
 };
 
 const mapDispatchToProps = function (dispatch) {
   return {
     onSubmit: (values, e, formApi) => {
-      dispatch(register(values.email, values.password));
+      dispatch(createUser(values.firstName, values.lastName, values.email, values.hNumber, values.password, true));
     }
   };
 };

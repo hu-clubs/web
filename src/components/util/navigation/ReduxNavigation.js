@@ -1,17 +1,20 @@
-import { connect } from 'react-redux';
+import {connect} from 'react-redux';
+import {setJwt} from '../../../store/authentication/actions';
 import Navigation from './Navigation';
-import {logout} from '../../../store/authentication/actions';
 
 const mapStateToProps = (state) => {
   return {
-    isLoggedIn: state.authentication.authentication.isLoggedIn
+    isLoggedIn: state.authentication.jwt.isLoggedIn,
+    firstName: state.authentication.jwt.firstName,
+    lastName: state.authentication.jwt.lastName,
+    id: state.authentication.jwt.id
   };
 };
 
 const mapDispatchToProps = function (dispatch) {
   return {
     onLogout: () => {
-      dispatch(logout());
+      dispatch(setJwt(null));
     }
   };
 };

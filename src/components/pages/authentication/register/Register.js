@@ -1,19 +1,37 @@
-import React, {Component} from 'react';
-import {Link} from 'react-router-dom';
-import PropTypes from 'prop-types';
-import ErrorNotification from '../../../shared/error/ErrorNotification';
-import {Form, Text} from 'react-form';
 import * as classNames from 'classnames';
+import PropTypes from 'prop-types';
+import React, {Component} from 'react';
+import {Form, Text} from 'react-form';
+import {Link, Redirect} from 'react-router-dom';
 import {
-  validateConfirmPassword,
   validateEmail,
-  validateFirstName, validateHNumber,
+  validateFirstName,
+  validateHNumber,
   validateLastName,
-  validatePassword
+  validatePassword,
+  validateRegister
 } from '../../../../validators';
+import ErrorNotification from '../../../util/errorNotification/ErrorNotification';
 
 class Register extends Component {
+  constructor (props) {
+    super(props);
+    this.state = {
+      hasBeenSubmitted: false
+    };
+  }
+
+  submit (values) {
+    this.setState({
+      hasBeenSubmitted: true
+    });
+    this.props.onSubmit(values);
+  }
+
   render () {
+    if (this.state.hasBeenSubmitted && !this.props.isFetching && !this.props.error) {
+      return (<Redirect to='/' />);
+    }
     return (
       <section className='section'>
         <div className='container'>
@@ -21,7 +39,8 @@ class Register extends Component {
             <div className='column is-one-third is-offset-one-third'>
               <h1 className='title is-1'>Register</h1>
               {!this.props.isFetching && this.props.error && <ErrorNotification title={this.props.error.name} message={this.props.error.message} stack={this.props.error.stack} />}
-              <Form onSubmit={this.props.onSubmit}>
+              <Form onSubmit={(values) => this.submit(values)}
+                validate={validateRegister}>
                 {formApi => (
                   <form onSubmit={formApi.submitForm}>
                     <div className='field'>
@@ -92,7 +111,6 @@ class Register extends Component {
                           })}
                           type='password'
                           field='confirmPassword'
-                          validate={validateConfirmPassword}
                           autoComplete='new-password' />
                       </div>
                       {formApi.errors && (<p className='help is-danger'>{formApi.errors.confirmPassword}</p>)}

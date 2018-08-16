@@ -1,10 +1,10 @@
-import { connect } from 'react-redux';
+import {connect} from 'react-redux';
+import {withRouter} from 'react-router-dom';
 import Router from './Router';
-import { withRouter } from 'react-router-dom';
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    isLoggedIn: state.authentication.authentication.isLoggedIn,
+    isLoggedIn: state.authentication.jwt.isLoggedIn,
     ...ownProps
   };
 };

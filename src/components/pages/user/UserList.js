@@ -1,8 +1,8 @@
+import PropTypes from 'prop-types';
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
-import PropTypes from 'prop-types';
 
-class List extends Component {
+class UserList extends Component {
   render () {
     console.log(this.props.users);
     let userListItems = Object.keys(this.props.users).map((key) => (
@@ -33,8 +33,8 @@ class List extends Component {
   }
 }
 
-List.propTypes = {
+UserList.propTypes = {
   users: PropTypes.object.isRequired
 };
 
-export default List;
+export default UserList;

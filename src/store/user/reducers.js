@@ -1,10 +1,45 @@
 import {combineReducers} from 'redux';
 
-import {FETCH_USER_BEGIN, FETCH_USER_ERROR, FETCH_USER_SUCCESS, INVALIDATE_USER} from './actions';
+import {
+  CREATE_USER_BEGIN,
+  CREATE_USER_ERROR,
+  CREATE_USER_SUCCESS,
+  FETCH_USER_BEGIN,
+  FETCH_USER_ERROR,
+  FETCH_USER_SUCCESS,
+  INVALIDATE_USER
+} from './actions';
+
+let initialCreateUserState = {
+  isFetching: false,
+  error: null
+};
 
 let initialDetailsState = {
   items: {}
 };
+
+export function createUserReducer (state = initialCreateUserState, action) {
+  switch (action.type) {
+    case CREATE_USER_BEGIN:
+      return {
+        isFetching: true,
+        error: null
+      };
+    case CREATE_USER_SUCCESS:
+      return {
+        isFetching: false,
+        error: null
+      };
+    case CREATE_USER_ERROR:
+      return {
+        isFetching: false,
+        error: action.error
+      };
+    default:
+      return state;
+  }
+}
 
 export function userDetailsReducer (state = initialDetailsState, action) {
   let userId = action.userId;
@@ -49,5 +84,6 @@ export function userDetailsReducer (state = initialDetailsState, action) {
 }
 
 export const userReducer = combineReducers({
-  details: userDetailsReducer
+  details: userDetailsReducer,
+  create: createUserReducer
 });

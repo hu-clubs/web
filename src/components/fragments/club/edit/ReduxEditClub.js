@@ -1,17 +1,18 @@
 import {connect} from 'react-redux';
-import {editClub, fetchClub} from '../../../../store/clubs/actions';
+import {requestUpdateClub} from '../../../../store/clubs/update/actions';
+import {fetchClubDetails} from '../../../../store/clubs/read/actions';
 import LoadingEditClub from './LoadingEditClub';
 
 export const mapStateToProps = function (state, props) {
   // TODO this is a little hacky
-  let club = state.clubs.details.items[props.id];
+  let club = state.clubs.read.items[props.id];
   if (club) {
     return {
-      club: state.clubs.details.items[props.id].data,
-      isFetching: state.clubs.details.items[props.id].isFetching,
-      error: state.clubs.details.items[props.id].error,
-      isEditFetching: state.clubs.edit.isFetching,
-      isEditError: state.clubs.edit.error
+      club: state.clubs.read.items[props.id].data,
+      isFetching: state.clubs.read.items[props.id].isFetching,
+      error: state.clubs.read.items[props.id].error,
+      isEditFetching: state.clubs.update.isFetching,
+      isEditError: state.clubs.update.error
     };
   } else {
     return {
@@ -27,10 +28,10 @@ export const mapStateToProps = function (state, props) {
 const mapDispatchToProps = function (dispatch, props) {
   return {
     onFetchClub: () => {
-      dispatch(fetchClub(props.id));
+      dispatch(fetchClubDetails(props.id));
     },
     onSave: (club) => {
-      dispatch(editClub(club));
+      dispatch(requestUpdateClub(club));
     }
   };
 };

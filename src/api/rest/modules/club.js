@@ -1,6 +1,6 @@
 import fetch from 'cross-fetch';
 
-export async function createClub (jwt, name, shortName) {
+export async function requestCreateClub (jwt, name, shortName) {
   let res = await fetch('http://localhost:8080/api/clubs', {
     method: 'POST',
     headers: {
@@ -22,7 +22,7 @@ export async function createClub (jwt, name, shortName) {
   return json;
 }
 
-export async function editClub (jwt, club) {
+export async function requestUpdateClub (jwt, club) {
   let res = await fetch('http://localhost:8080/api/clubs/' + club._id, {
     method: 'PATCH',
     headers: {
@@ -44,7 +44,7 @@ export async function editClub (jwt, club) {
   return json;
 }
 
-export async function deleteClub (jwt, clubId) {
+export async function requestDeleteClub (jwt, clubId) {
   let res = await fetch('http://localhost:8080/api/clubs/' + clubId, {
     method: 'DELETE',
     credentials: 'include',
@@ -62,7 +62,7 @@ export async function deleteClub (jwt, clubId) {
   return json;
 }
 
-export async function getClub (jwt, clubId) {
+export async function fetchClubDetails (jwt, clubId) {
   let res = await fetch('http://localhost:8080/api/clubs/' + clubId, {
     credentials: 'include',
     headers: {
@@ -79,7 +79,7 @@ export async function getClub (jwt, clubId) {
   return json;
 }
 
-export async function getClubs (jwt) {
+export async function fetchClubList (jwt) {
   let res = await fetch('http://localhost:8080/api/clubs', {
     credentials: 'include',
     headers: {

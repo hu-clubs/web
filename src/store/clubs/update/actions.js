@@ -10,7 +10,7 @@ export function requestUpdateClub (club) {
     (async function () {
       dispatch(updateClubBegin());
       try {
-        await api.club.editClub(jwt, club);
+        await api.club.requestUpdateClub(jwt, club);
         dispatch(updateClubSuccess());
       } catch (err) {
         dispatch(updateClubError(err));

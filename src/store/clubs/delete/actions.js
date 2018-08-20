@@ -10,7 +10,7 @@ export function requestDeleteClub (id) {
     (async function () {
       dispatch(deleteClubBegin());
       try {
-        await api.club.deleteClub(jwt, id);
+        await api.club.requestDeleteClub(jwt, id);
         dispatch(deleteClubSuccess());
       } catch (err) {
         dispatch(deleteClubError(err));

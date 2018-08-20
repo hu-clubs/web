@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React, {Component} from 'react';
 import {NavLink, Redirect, Route, Switch} from 'react-router-dom';
-import ReduxUserInformation from '../../fragments/user/details/information/ReduxUserInformation';
+import UserInformation from '../../fragments/user/details/UserInformation';
 import ErrorNotification from '../../fragments/misc/errorNotification/ErrorNotification';
 
 class ClubDetails extends Component {
@@ -35,7 +35,7 @@ class ClubDetails extends Component {
 
                   <Route path={this.props.match.url + '/information'}
                     render={() => {
-                      return <ReduxUserInformation id={userId} />;
+                      return <UserInformation id={userId} />;
                     }}
                   />
 

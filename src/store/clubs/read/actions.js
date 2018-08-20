@@ -16,7 +16,7 @@ export function fetchClubDetails (clubId) {
     (async function () {
       dispatch(fetchClubDetailsBegin(clubId));
       try {
-        let club = await api.club.getClub(jwt, clubId);
+        let club = await api.club.fetchClubDetails(jwt, clubId);
         dispatch(fetchClubDetailsSuccess(clubId, club));
       } catch (err) {
         dispatch(fetchClubDetailsError(clubId, err));
@@ -55,7 +55,7 @@ export function fetchClubList () {
     (async function () {
       dispatch(fetchClubListBegin());
       try {
-        let clubs = await api.club.getClubs(jwt);
+        let clubs = await api.club.fetchClubList(jwt);
         dispatch(fetchClubListSuccess(clubs));
       } catch (err) {
         dispatch(fetchClubListError(err));
@@ -76,7 +76,7 @@ export function fetchClubListSuccess (clubArray) {
       data: club
     };
     return clubs;
-  });
+  }, {});
 
   return {
     type: FETCH_CLUB_LIST_SUCCESS,

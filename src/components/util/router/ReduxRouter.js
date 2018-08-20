@@ -4,7 +4,7 @@ import Router from './Router';
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    isLoggedIn: state.authentication.jwt.isLoggedIn,
+    isLoggedIn: state.authentication.jwt.token !== null,
     ...ownProps
   };
 };

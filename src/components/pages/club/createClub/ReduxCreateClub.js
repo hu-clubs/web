@@ -1,5 +1,5 @@
 import {connect} from 'react-redux';
-import {createClub} from '../../../../store/clubs/actions';
+import {requestCreateClub} from '../../../../store/clubs/create/actions';
 import CreateClub from './CreateClub';
 
 const mapStateToProps = function (state) {
@@ -12,7 +12,7 @@ const mapStateToProps = function (state) {
 const mapDispatchToProps = function (dispatch) {
   return {
     onSubmit: (values, e, formApi) => {
-      dispatch(createClub(values.name, values.shortName));
+      dispatch(requestCreateClub(values.name, values.shortName));
     }
   };
 };

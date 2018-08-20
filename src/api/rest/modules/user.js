@@ -1,6 +1,6 @@
 import fetch from 'cross-fetch';
 
-export async function getUser (jwt, userId) {
+export async function fetchUserDetails (jwt, userId) {
   let res = await fetch('http://localhost:8080/api/users/' + userId, {
     credentials: 'include',
     headers: {
@@ -17,7 +17,7 @@ export async function getUser (jwt, userId) {
   return json;
 }
 
-export async function createUser (jwt, firstName, lastName, email, hNumber, password, register) {
+export async function requestCreateUser (jwt, firstName, lastName, email, hNumber, password, register) {
   let res = await fetch('http://localhost:8080/api/users', {
     method: 'POST',
     headers: {

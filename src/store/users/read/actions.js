@@ -11,7 +11,7 @@ export function fetchUserDetails (userId) {
     (async function () {
       dispatch(fetchUserDetailsBegin(userId));
       try {
-        let user = await api.user.getUser(jwt, userId);
+        let user = await api.user.fetchUserDetails(jwt, userId);
         dispatch(fetchUserDetailsSuccess(userId, user));
       } catch (err) {
         dispatch(fetchUserDetailsError(userId, err));

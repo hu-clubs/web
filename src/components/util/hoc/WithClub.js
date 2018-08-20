@@ -1,10 +1,10 @@
 import connect from 'react-redux/es/connect/connect';
-import {fetchClub} from '../../../store/clubs/actions';
+import {fetchClubDetails} from '../../../store/clubs/read/actions';
 import WithLoading from './WithLoading';
 
 function WithRedux (WrappedComponent, id) {
   const mapStateToProps = function (state, props) {
-    let club = state.clubs.details.items[id];
+    let club = state.clubs.read.items[id];
     if (club) {
       return {
         club: club.data,
@@ -23,7 +23,7 @@ function WithRedux (WrappedComponent, id) {
   const mapDispatchToProps = function (dispatch, props) {
     return {
       onFetch: () => {
-        dispatch(fetchClub(id));
+        dispatch(fetchClubDetails(id));
       }
     };
   };

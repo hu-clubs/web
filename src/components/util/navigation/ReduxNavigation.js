@@ -4,7 +4,7 @@ import Navigation from './Navigation';
 
 const mapStateToProps = (state) => {
   return {
-    isLoggedIn: state.authentication.jwt.isLoggedIn,
+    isLoggedIn: state.authentication.jwt.isLoggedIn !== null,
     firstName: state.authentication.jwt.firstName,
     lastName: state.authentication.jwt.lastName,
     id: state.authentication.jwt.id

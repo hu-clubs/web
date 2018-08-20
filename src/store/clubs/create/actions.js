@@ -10,7 +10,7 @@ export function requestCreateClub (name, shortName) {
     (async function () {
       dispatch(createClubBegin());
       try {
-        await api.club.createClub(jwt, name, shortName);
+        await api.club.requestCreateClub(jwt, name, shortName);
         dispatch(createClubSuccess());
       } catch (err) {
         dispatch(createClubError(err));

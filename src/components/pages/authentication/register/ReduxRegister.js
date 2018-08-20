@@ -1,5 +1,5 @@
 import {connect} from 'react-redux';
-import {createUser} from '../../../../store/users/actions';
+import {requestCreateUser} from '../../../../store/users/create/actions';
 import Register from './Register';
 
 const mapStateToProps = function (state) {
@@ -12,7 +12,7 @@ const mapStateToProps = function (state) {
 const mapDispatchToProps = function (dispatch) {
   return {
     onSubmit: (values, e, formApi) => {
-      dispatch(createUser(values.firstName, values.lastName, values.email, values.hNumber, values.password, true));
+      dispatch(requestCreateUser(values.firstName, values.lastName, values.email, values.hNumber, values.password, true));
     }
   };
 };

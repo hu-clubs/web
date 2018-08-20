@@ -1,19 +1,19 @@
 import {connect} from 'react-redux';
-import {fetchClubs} from '../../../../store/clubs/actions';
+import {fetchClubList} from '../../../../store/clubs/read/actions';
 import LoadingClubList from './LoadingClubList';
 
 export const mapStateToProps = function (state) {
   return {
-    isFetching: state.clubs.list.isFetching,
-    clubs: state.clubs.list.items,
-    error: state.clubs.list.error
+    isFetching: state.clubs.read.isFetching,
+    clubs: state.clubs.read.items,
+    error: state.clubs.read.error
   };
 };
 
 const mapDispatchToProps = function (dispatch) {
   return {
     onFetchClubs: () => {
-      dispatch(fetchClubs());
+      dispatch(fetchClubList());
     }
   };
 };

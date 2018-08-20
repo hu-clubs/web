@@ -6,7 +6,7 @@ export const REQUEST_DELETE_CLUB_ERROR = 'REQUEST_DELETE_CLUB_ERROR';
 
 export function requestDeleteClub (id) {
   return function (dispatch, getState) {
-    let jwt = getState().authentication.jwt.jwt;
+    let jwt = getState().authentication.jwt.token;
     (async function () {
       dispatch(deleteClubBegin());
       try {

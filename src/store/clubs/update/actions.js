@@ -6,7 +6,7 @@ export const REQUEST_UPDATE_CLUB_ERROR = 'REQUEST_UPDATE_CLUB_ERROR';
 
 export function requestUpdateClub (club) {
   return function (dispatch, getState) {
-    let jwt = getState().authentication.jwt.jwt;
+    let jwt = getState().authentication.jwt.token;
     (async function () {
       dispatch(updateClubBegin());
       try {

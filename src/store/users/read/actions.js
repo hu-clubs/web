@@ -7,7 +7,7 @@ export const INVALIDATE_USER_DETAILS = 'INVALIDATE_USER_DETAILS';
 
 export function fetchUserDetails (userId) {
   return function (dispatch, getState) {
-    let jwt = getState().authentication.jwt.jwt;
+    let jwt = getState().authentication.jwt.token;
     (async function () {
       dispatch(fetchUserDetailsBegin(userId));
       try {

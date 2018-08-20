@@ -7,7 +7,7 @@ export const REQUEST_CREATE_USER_ERROR = 'REQUEST_CREATE_USER_ERROR';
 
 export function requestCreateUser (firstName, lastName, email, hNumber, password, register) {
   return function (dispatch, getState) {
-    let jwt = register ? null : getState().authentication.jwt.jwt;
+    let jwt = register ? null : getState().authentication.jwt.token;
     (async function () {
       dispatch(createUserBegin());
       try {

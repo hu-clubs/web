@@ -12,7 +12,7 @@ export const INVALIDATE_CLUB_DETAILS = 'INVALIDATE_CLUB_DETAILS';
 
 export function fetchClubDetails (clubId) {
   return function (dispatch, getState) {
-    let jwt = getState().authentication.jwt.jwt;
+    let jwt = getState().authentication.jwt.token;
     (async function () {
       dispatch(fetchClubDetailsBegin(clubId));
       try {
@@ -51,7 +51,7 @@ export function fetchClubDetailsError (clubId, error) {
 
 export function fetchClubList () {
   return function (dispatch, getState) {
-    let jwt = getState().authentication.jwt.jwt;
+    let jwt = getState().authentication.jwt.token;
     (async function () {
       dispatch(fetchClubListBegin());
       try {

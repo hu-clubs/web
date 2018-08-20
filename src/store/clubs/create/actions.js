@@ -6,7 +6,7 @@ export const REQUEST_CREATE_CLUB_ERROR = 'REQUEST_CREATE_CLUB_ERROR';
 
 export function requestCreateClub (name, shortName) {
   return function (dispatch, getState) {
-    let jwt = getState().authentication.jwt.jwt;
+    let jwt = getState().authentication.jwt.token;
     (async function () {
       dispatch(createClubBegin());
       try {

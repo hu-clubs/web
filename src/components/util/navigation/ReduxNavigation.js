@@ -1,5 +1,5 @@
 import {connect} from 'react-redux';
-import {setJwt} from '../../../store/authentication/actions';
+import {removeJwt} from '../../../store/authentication/jwt/actions';
 import Navigation from './Navigation';
 
 const mapStateToProps = (state) => {
@@ -14,7 +14,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = function (dispatch) {
   return {
     onLogout: () => {
-      dispatch(setJwt(null));
+      dispatch(removeJwt());
     }
   };
 };

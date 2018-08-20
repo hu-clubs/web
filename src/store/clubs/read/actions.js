@@ -32,20 +32,20 @@ export function fetchClubDetailsBegin (clubId) {
   };
 }
 
-export function fetchClubDetailsSuccess (clubId, json) {
+export function fetchClubDetailsSuccess (clubId, club) {
   return {
     type: FETCH_CLUB_DETAILS_SUCCESS,
     clubId: clubId,
-    club: json,
+    club: club,
     receivedAt: Date.now()
   };
 }
 
-export function fetchClubDetailsError (clubId, json) {
+export function fetchClubDetailsError (clubId, error) {
   return {
     type: FETCH_CLUB_DETAILS_ERROR,
     clubId: clubId,
-    error: json
+    error
   };
 }
 
@@ -70,11 +70,14 @@ export function fetchClubListBegin () {
   };
 }
 
-export function fetchClubListSuccess (json) {
-  let clubs = {};
-  for (let club of json) {
-    clubs[club._id] = club;
-  }
+export function fetchClubListSuccess (clubArray) {
+  let clubs = clubArray.reduce((clubs, club) => {
+    clubs[club._id] = {
+      data: club
+    };
+    return clubs;
+  });
+
   return {
     type: FETCH_CLUB_LIST_SUCCESS,
     clubs: clubs,
@@ -82,9 +85,9 @@ export function fetchClubListSuccess (json) {
   };
 }
 
-export function fetchClubListError (json) {
+export function fetchClubListError (error) {
   return {
     type: FETCH_CLUB_LIST_ERROR,
-    error: json
+    error
   };
 }

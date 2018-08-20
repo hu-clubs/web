@@ -10,8 +10,8 @@ export function requestDeleteClub (id) {
     (async function () {
       dispatch(deleteClubBegin());
       try {
-        let json = await api.club.deleteClub(jwt, id);
-        dispatch(deleteClubSuccess(json));
+        await api.club.deleteClub(jwt, id);
+        dispatch(deleteClubSuccess());
       } catch (err) {
         dispatch(deleteClubError(err));
       }

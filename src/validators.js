@@ -1,4 +1,4 @@
-// TODO improve validation with max length, regex, etc
+// TODO improve validation with max length, regex, etc.
 
 export function validateFirstName (value) {
   let error;

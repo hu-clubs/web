@@ -1,5 +1,5 @@
 import {connect} from 'react-redux';
-import {deleteClub, fetchClub} from '../../../../store/club/actions';
+import {deleteClub, fetchClub} from '../../../../store/clubs/actions';
 import LoadingDeleteClub from './LoadingDeleteClub';
 
 export const mapStateToProps = function (state, props) {

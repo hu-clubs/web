@@ -1,12 +1,12 @@
 import {combineReducers} from 'redux';
 import {authenticationReducer} from './authentication/reducers';
-import {clubReducer} from './club/reducers';
-import {userReducer} from './user/reducers';
+import clubsReducer from './clubs/reducers';
+import usersReducer from './users/reducers';
 
 export function rootReducer (state = {}, action) {
   return combineReducers({
-    clubs: clubReducer,
     authentication: authenticationReducer,
-    users: userReducer
+    clubs: clubsReducer,
+    users: usersReducer
   });
 }

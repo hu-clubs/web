@@ -9,7 +9,7 @@ import {
   INVALIDATE_CLUB_LIST
 } from './actions';
 
-let initialListState = {
+let initialState = {
   items: {},
   isFetching: false,
   error: null,
@@ -17,7 +17,7 @@ let initialListState = {
   didInvalidate: false
 };
 
-export function reducer (state = initialListState, action) {
+export default function readClubReducer (state = initialState, action) {
   let clubId = action.clubId;
   switch (action.type) {
     case INVALIDATE_CLUB_DETAILS:
@@ -39,8 +39,8 @@ export function reducer (state = initialListState, action) {
           [clubId]: {
             ...state.items[clubId],
             isFetching: true,
-            didInvalidate: false,
-            error: null
+            error: null,
+            didInvalidate: false
           }
         }
       };
@@ -51,11 +51,11 @@ export function reducer (state = initialListState, action) {
           ...state.items,
           [clubId]: {
             ...state.items[clubId],
-            isFetching: false,
-            didInvalidate: false,
             data: action.club,
+            isFetching: false,
+            error: null,
             lastUpdated: action.receivedAt,
-            error: null
+            didInvalidate: false
           }
         }
       };
@@ -67,10 +67,9 @@ export function reducer (state = initialListState, action) {
           [clubId]: {
             ...state.items[clubId],
             isFetching: false,
-            didInvalidate: false,
-            data: {},
+            error: action.error,
             lastUpdated: action.receivedAt,
-            error: action.error
+            didInvalidate: false
           }
         }
       };
@@ -98,7 +97,6 @@ export function reducer (state = initialListState, action) {
     case FETCH_CLUB_LIST_ERROR:
       return {
         ...state,
-        items: {},
         isFetching: false,
         error: action.error,
         lastUpdated: action.receivedAt,

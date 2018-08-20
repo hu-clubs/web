@@ -1,5 +1,5 @@
 import {connect} from 'react-redux';
-import {fetchClubs} from '../../../../store/club/actions';
+import {fetchClubs} from '../../../../store/clubs/actions';
 import LoadingClubList from './LoadingClubList';
 
 export const mapStateToProps = function (state) {

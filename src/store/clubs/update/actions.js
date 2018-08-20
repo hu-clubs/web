@@ -10,8 +10,8 @@ export function requestUpdateClub (club) {
     (async function () {
       dispatch(updateClubBegin());
       try {
-        let json = await api.club.editClub(jwt, club);
-        dispatch(updateClubSuccess(json));
+        await api.club.editClub(jwt, club);
+        dispatch(updateClubSuccess());
       } catch (err) {
         dispatch(updateClubError(err));
       }
@@ -31,9 +31,9 @@ export function updateClubSuccess () {
   };
 }
 
-export function updateClubError (json) {
+export function updateClubError (error) {
   return {
     type: REQUEST_UPDATE_CLUB_ERROR,
-    error: json
+    error
   };
 }

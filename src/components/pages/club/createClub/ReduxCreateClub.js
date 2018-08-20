@@ -1,5 +1,5 @@
 import {connect} from 'react-redux';
-import {createClub} from '../../../../store/club/actions';
+import {createClub} from '../../../../store/clubs/actions';
 import CreateClub from './CreateClub';
 
 const mapStateToProps = function (state) {

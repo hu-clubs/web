@@ -38,10 +38,11 @@ export async function login (email, password) {
   return json;
 }
 
-export async function createUser (firstName, lastName, email, hNumber, password, register) {
+export async function createUser (jwt, firstName, lastName, email, hNumber, password, register) {
   let res = await fetch('http://localhost:8080/api/users', {
     method: 'POST',
     headers: {
+      'Authorization': jwt,
       'Content-Type': 'application/json'
     },
     body: JSON.stringify({

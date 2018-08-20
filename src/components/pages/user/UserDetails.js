@@ -1,8 +1,8 @@
 import PropTypes from 'prop-types';
 import React, {Component} from 'react';
 import {NavLink, Redirect, Route, Switch} from 'react-router-dom';
-import ReduxUserInformation from '../../shared/user/details/information/ReduxUserInformation';
-import ErrorNotification from '../../util/errorNotification/ErrorNotification';
+import ReduxUserInformation from '../../fragments/user/details/information/ReduxUserInformation';
+import ErrorNotification from '../../fragments/misc/errorNotification/ErrorNotification';
 
 class ClubDetails extends Component {
   render () {

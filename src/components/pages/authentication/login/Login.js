@@ -4,7 +4,8 @@ import React, {Component} from 'react';
 import {Form, Text} from 'react-form';
 import {Link} from 'react-router-dom';
 import {validateEmail, validatePassword} from '../../../../validators';
-import ErrorNotification from '../../../util/errorNotification/ErrorNotification';
+import ErrorNotification from '../../../fragments/misc/errorNotification/ErrorNotification';
+import WithRequest from '../../../util/hoc/WithRequest';
 
 class Login extends Component {
   render () {
@@ -74,7 +75,7 @@ class Login extends Component {
 Login.propTypes = {
   onSubmit: PropTypes.func.isRequired,
   error: PropTypes.object,
-  isFetching: PropTypes.bool
+  isFetching: PropTypes.bool.isRequired
 };
 
-export default Login;
+export default WithRequest(Login);

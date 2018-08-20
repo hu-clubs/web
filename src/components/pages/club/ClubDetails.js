@@ -1,15 +1,33 @@
 import PropTypes from 'prop-types';
 import React, {Component} from 'react';
 import {NavLink, Redirect, Route, Switch} from 'react-router-dom';
-import ReduxClubInformation from '../../shared/club/details/information/ReduxClubInformation';
-import ReduxClubMembers from '../../shared/club/details/members/ReduxClubMembers';
-import ReduxClubMeetings from '../../shared/club/details/meetings/ReduxClubMeetings';
-import ComingSoon from '../../util/ComingSoon';
-import ErrorNotification from '../../util/errorNotification/ErrorNotification';
+import ClubInformation from '../../fragments/club/details/ClubInformation';
+import ClubMembers from '../../fragments/club/details/ClubMembers';
+import ClubMeetings from '../../fragments/club/details/ClubMeetings';
+import ComingSoon from '../../fragments/misc/ComingSoon';
+import ErrorNotification from '../../fragments/misc/errorNotification/ErrorNotification';
+import WithClub from '../../util/hoc/WithClub';
 
-class ClubDetails extends Component {
+export default class ClubDetails extends Component {
+  static propTypes = {
+    match: PropTypes.object.isRequired
+  };
+
+  constructor (props) {
+    super(props);
+    let id = this.props.match.params.id;
+    this.state = {
+      ClubInformationWithClub: WithClub(id)(ClubInformation),
+      ClubMeetingsWithClub: WithClub(id)(ClubMeetings),
+      ClubMembersWithClub: WithClub(id)(ClubMembers)
+    };
+  }
+
   render () {
     let clubId = this.props.match.params.id;
+    let ClubInformationWithClub = this.state.ClubInformationWithClub;
+    let ClubMeetingsWithClub = this.state.ClubMeetingsWithClub;
+    let ClubMembersWithClub = this.state.ClubMembersWithClub;
     return (
       <div>
         <section className='section'>
@@ -22,6 +40,7 @@ class ClubDetails extends Component {
                   </p>
                   <ul className='menu-list'>
                     <li><NavLink to={'/club/' + clubId + '/details/information'} activeClassName='is-active'>Information</NavLink></li>
+                    <li><NavLink to={'/club/' + clubId + '/details/announcements'} activeClassName='is-active'>Announcements</NavLink></li>
                     <li><NavLink to={'/club/' + clubId + '/details/members'} activeClassName='is-active'>Members</NavLink></li>
                     <li><NavLink to={'/club/' + clubId + '/details/meetings'} activeClassName='is-active'>Meetings</NavLink></li>
                     <li><NavLink to={'/club/' + clubId + '/details/functions'} activeClassName='is-active'>Functions</NavLink></li>
@@ -44,21 +63,27 @@ class ClubDetails extends Component {
                     }}
                   />
 
+                  <Route path={this.props.match.url + '/announcements'}
+                    render={() => {
+                      return <ComingSoon />;
+                    }}
+                  />
+
                   <Route path={this.props.match.url + '/information'}
                     render={() => {
-                      return <ReduxClubInformation id={clubId} />;
+                      return <ClubInformationWithClub />;
                     }}
                   />
 
                   <Route path={this.props.match.url + '/members'}
                     render={() => {
-                      return <ReduxClubMembers id={clubId} />;
+                      return <ClubMembersWithClub id={clubId} />;
                     }}
                   />
 
                   <Route path={this.props.match.url + '/meetings'}
                     render={() => {
-                      return <ReduxClubMeetings id={clubId} />;
+                      return <ClubMeetingsWithClub id={clubId} />;
                     }}
                   />
 
@@ -99,9 +124,3 @@ class ClubDetails extends Component {
     );
   }
 }
-
-ClubDetails.propTypes = {
-  match: PropTypes.object.isRequired
-};
-
-export default ClubDetails;

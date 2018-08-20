@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React, {Component} from 'react';
-import '../util/errorNotification/ErrorNotification.css';
+import '../fragments/misc/errorNotification/ErrorNotification.css';
 
 class ErrorPage extends Component {
   render () {

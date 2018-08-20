@@ -4,8 +4,8 @@ import Login from './Login';
 
 const mapStateToProps = function (state) {
   return {
-    isFetching: state.authentication.jwt.isFetching,
-    error: state.authentication.jwt.error
+    isFetching: state.authentication.login.isFetching,
+    error: state.authentication.login.error
   };
 };
 

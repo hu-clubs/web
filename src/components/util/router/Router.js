@@ -13,6 +13,7 @@ import ErrorPage from '../../pages/ErrorPage';
 import Home from '../../pages/home/Home';
 import UserDetails from '../../pages/user/UserDetails';
 import ErrorBoundary from '../ErrorBoundary';
+import EditClub from '../../pages/club/EditClub';
 
 class Router extends Component {
   isLoggedIn () {
@@ -63,6 +64,12 @@ class Router extends Component {
             <Route path='/club/:id/delete'
               render={(props) => {
                 return this.isLoggedIn() ? <DeleteClub {...props} /> : <ReduxLogin />;
+              }}
+            />
+
+            <Route path='/club/:id/edit'
+              render={(props) => {
+                return this.isLoggedIn() ? <EditClub {...props} /> : <ReduxLogin />;
               }}
             />
 

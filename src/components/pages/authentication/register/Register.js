@@ -11,7 +11,7 @@ import {
   validatePassword,
   validateRegister
 } from '../../../../validators';
-import ErrorNotification from '../../../util/errorNotification/ErrorNotification';
+import ErrorNotification from '../../../fragments/misc/errorNotification/ErrorNotification';
 
 class Register extends Component {
   constructor (props) {

@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
-import ReduxClubList from '../../shared/club/list/ReduxClubList';
+import ReduxClubList from '../../fragments/club/list/ReduxClubList';
 
 export default class ClubList extends Component {
   render () {

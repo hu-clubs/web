@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import React, {Component} from 'react';
 import {Form, Text} from 'react-form';
 import {validateClubName, validateClubShortName} from '../../../../validators';
-import ErrorNotification from '../../../util/errorNotification/ErrorNotification';
+import ErrorNotification from '../../../fragments/misc/errorNotification/ErrorNotification';
 import {Redirect} from 'react-router-dom';
 
 export default class CreateClub extends Component {
@@ -15,10 +15,10 @@ export default class CreateClub extends Component {
   }
 
   submit (values) {
+    this.props.onSubmit(values);
     this.setState({
       hasBeenSubmitted: true
     });
-    this.props.onSubmit(values);
   }
 
   render () {

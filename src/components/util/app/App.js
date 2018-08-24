@@ -7,7 +7,7 @@ import registerServiceWorker from '../../../registerServiceWorker';
 import {store} from '../../../store/store';
 import Footer from '../footer/Footer';
 import ReduxNavigation from '../navigation/ReduxNavigation';
-import ReduxRouter from '../router/ReduxRouter';
+import RouterContainer from '../router/RouterContainer';
 import './App.css';
 
 ReactDOM.render((
@@ -16,7 +16,7 @@ ReactDOM.render((
       <div className='site'>
         <ReduxNavigation />
         <div className='site-content'>
-          <ReduxRouter />
+          <RouterContainer />
         </div>
         <Footer />
       </div>

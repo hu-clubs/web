@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React, {Component} from 'react';
-import ErrorNotification from '../../fragments/misc/errorNotification/ErrorNotification';
-import LoadingIndicator from '../../fragments/misc/loadingIndicator/LoadingIndicator';
+import ErrorNotification from '../../fragments/errorNotification/ErrorNotification';
+import LoadingIndicator from '../../fragments/loadingIndicator/LoadingIndicator';
 
 export default function WithLoading (WrappedComponent) {
   return class extends Component {

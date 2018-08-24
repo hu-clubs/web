@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React, {Component, Fragment} from 'react';
-import ErrorNotification from '../../fragments/misc/errorNotification/ErrorNotification';
+import ErrorNotification from '../../fragments/errorNotification/ErrorNotification';
 
 export default function WithRequest (WrappedComponent) {
   return class extends Component {

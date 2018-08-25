@@ -55,7 +55,10 @@ class DeleteClub extends Component {
 DeleteClub.propTypes = {
   club: PropTypes.object.isRequired,
   isFetching: PropTypes.bool,
-  error: PropTypes.object,
+  error: PropTypes.oneOfType([
+    PropTypes.object,
+    PropTypes.bool
+  ]).isRequired,
   onDelete: PropTypes.func.isRequired,
   history: PropTypes.object.isRequired
 };

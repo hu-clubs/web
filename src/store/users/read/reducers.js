@@ -31,7 +31,7 @@ export default function readUserReducer (state = initialState, action) {
           [userId]: {
             ...state.items[userId],
             isFetching: true,
-            error: null,
+            error: false,
             didInvalidate: false
           }
         }
@@ -45,7 +45,7 @@ export default function readUserReducer (state = initialState, action) {
             ...state.items[userId],
             data: action.user,
             isFetching: false,
-            error: null,
+            error: false,
             lastUpdated: action.receivedAt,
             didInvalidate: false
           }

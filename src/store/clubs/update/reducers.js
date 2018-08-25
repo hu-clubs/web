@@ -2,7 +2,7 @@ import {REQUEST_UPDATE_CLUB_BEGIN, REQUEST_UPDATE_CLUB_ERROR, REQUEST_UPDATE_CLU
 
 let initialState = {
   isFetching: false,
-  error: null
+  error: false
 };
 
 export default function updateClubReducer (state = initialState, action) {
@@ -10,12 +10,12 @@ export default function updateClubReducer (state = initialState, action) {
     case REQUEST_UPDATE_CLUB_BEGIN:
       return {
         isFetching: true,
-        error: null
+        error: false
       };
     case REQUEST_UPDATE_CLUB_SUCCESS:
       return {
         isFetching: false,
-        error: null
+        error: false
       };
     case REQUEST_UPDATE_CLUB_ERROR:
       return {

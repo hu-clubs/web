@@ -16,7 +16,7 @@ const mapStateToProps = function (state, ownProps) {
     return {
       club: null,
       isFetching: true,
-      error: null
+      error: false
     };
   }
 };

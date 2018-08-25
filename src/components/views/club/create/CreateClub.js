@@ -7,6 +7,16 @@ import ErrorNotification from '../../../fragments/errorNotification/ErrorNotific
 import {Redirect} from 'react-router-dom';
 
 export default class CreateClub extends Component {
+  static propTypes = {
+    onSubmit: PropTypes.func.isRequired,
+    error: PropTypes.oneOfType([
+      PropTypes.object,
+      PropTypes.bool
+    ]).isRequired,
+    isRequesting: PropTypes.bool,
+    history: PropTypes.object
+  };
+
   constructor (props) {
     super(props);
     this.state = {
@@ -22,9 +32,13 @@ export default class CreateClub extends Component {
   }
 
   render () {
-    if (this.state.hasBeenSubmitted && !this.props.isFetching && !this.props.error) {
-      return (<Redirect to='/club/list' />);
+    let {hasBeenSubmitted} = this.state;
+    let {history, isRequesting, error} = this.props;
+
+    if (hasBeenSubmitted && !isRequesting && !error) {
+      return <Redirect to='/club/list' />;
     }
+
     return (
       <div>
         <section className='section'>
@@ -32,7 +46,7 @@ export default class CreateClub extends Component {
             <div className='columns'>
               <div className='column is-one-third is-offset-one-third'>
                 <h1 className='title is-1'>Create Club</h1>
-                {!this.props.isFetching && this.props.error && <ErrorNotification title={this.props.error.name} message={this.props.error.message} stack={this.props.error.stack} />}
+                {!isRequesting && error && <ErrorNotification title={error.name} message={error.message} stack={error.stack} />}
                 <Form onSubmit={(values) => this.submit(values)}>
                   {formApi => (
                     <form onSubmit={formApi.submitForm}>
@@ -61,7 +75,7 @@ export default class CreateClub extends Component {
                           <button className='button is-primary'>Submit</button>
                         </p>
                         <p className='control'>
-                          <a className='button is-danger' onClick={this.props.history.goBack}>Cancel</a>
+                          <a className='button is-danger' onClick={history.goBack}>Cancel</a>
                         </p>
                       </div>
                     </form>
@@ -75,10 +89,3 @@ export default class CreateClub extends Component {
     );
   }
 }
-
-CreateClub.propTypes = {
-  onSubmit: PropTypes.func.isRequired,
-  error: PropTypes.object,
-  isFetching: PropTypes.bool,
-  history: PropTypes.object
-};

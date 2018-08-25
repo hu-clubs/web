@@ -7,23 +7,30 @@ export default function WithLoading (WrappedComponent) {
   return class extends Component {
     static propTypes = {
       isFetching: PropTypes.bool.isRequired,
-      error: PropTypes.object,
-      onFetch: PropTypes.func
+      error: PropTypes.oneOfType([
+        PropTypes.object,
+        PropTypes.bool
+      ]).isRequired,
+      onFetch: PropTypes.func.isRequired
+    };
+
+    loadData = () => {
+      this.props.onFetch();
     };
 
     componentDidMount () {
-      if (this.props.onFetch) {
-        this.props.onFetch();
-      }
+      this.loadData();
     }
 
     render () {
-      return (
-        this.props.isFetching
-          ? <LoadingIndicator /> : this.props.error
-            ? <ErrorNotification title={this.props.error.name} message={this.props.error.message} />
-            : <WrappedComponent {...this.props} />
-      );
+      let {isFetching, error, ...props} = this.props;
+      if (isFetching) {
+        return <LoadingIndicator />;
+      } else if (error) {
+        return <ErrorNotification title={error.name} message={error.message} />;
+      } else {
+        return <WrappedComponent {...props} />;
+      }
     }
   };
 }

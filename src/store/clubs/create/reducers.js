@@ -1,25 +1,25 @@
 import {REQUEST_CREATE_CLUB_BEGIN, REQUEST_CREATE_CLUB_ERROR, REQUEST_CREATE_CLUB_SUCCESS} from './actions';
 
 let initialState = {
-  isFetching: false,
-  error: null
+  isRequesting: false,
+  error: false
 };
 
 export default function createClubReducer (state = initialState, action) {
   switch (action.type) {
     case REQUEST_CREATE_CLUB_BEGIN:
       return {
-        isFetching: true,
-        error: null
+        isRequesting: true,
+        error: false
       };
     case REQUEST_CREATE_CLUB_SUCCESS:
       return {
-        isFetching: false,
-        error: null
+        isRequesting: false,
+        error: false
       };
     case REQUEST_CREATE_CLUB_ERROR:
       return {
-        isFetching: false,
+        isRequesting: false,
         error: action.error
       };
     default:

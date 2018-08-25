@@ -1,21 +1,25 @@
 import PropTypes from 'prop-types';
 import React, {Component} from 'react';
 import {Redirect, Route, Switch} from 'react-router-dom';
-import LoginContainer from '../../views/authentication/login/LoginContainer';
+import LoginView from '../../views/authentication/login/LoginView';
 import LoginHelp from '../../views/authentication/loginHelp/LoginHelp';
 import ReduxRegister from '../../views/authentication/register/RegisterContainer';
 import RegisterHelp from '../../views/authentication/registerHelp/RegisterHelp';
-import ClubListView from '../../views/club/list/ClubListView';
 import CreateClubContainer from '../../views/club/create/CreateClubContainer';
-import ClubDetailsContainer from '../../views/club/details/ClubDetailsContainer';
 import DeleteClubView from '../../views/club/delete/DeleteClubView';
+import ClubDetailsContainer from '../../views/club/details/ClubDetailsContainer';
+import EditClubView from '../../views/club/edit/EditClubView';
+import ClubListView from '../../views/club/list/ClubListView';
+import ErrorBoundary from '../../views/ErrorBoundary';
 import ErrorPage from '../../views/ErrorPage';
 import Home from '../../views/home/Home';
 import UserDetails from '../../views/user/details/UserDetails';
-import ErrorBoundary from '../../views/ErrorBoundary';
-import EditClubView from '../../views/club/edit/EditClubView';
 
-class Router extends Component {
+export default class Router extends Component {
+  static propTypes = {
+    isLoggedIn: PropTypes.bool.isRequired
+  };
+
   isLoggedIn () {
     return this.props.isLoggedIn;
   }
@@ -33,7 +37,7 @@ class Router extends Component {
 
             <Route path='/login' exact
               render={() => {
-                return this.isLoggedIn() ? <Redirect to='/' /> : <LoginContainer />;
+                return this.isLoggedIn() ? <Redirect to='/' /> : <LoginView />;
               }}
             />
 
@@ -51,37 +55,37 @@ class Router extends Component {
 
             <Route path='/club/list' exact
               render={() => {
-                return this.isLoggedIn() ? <ClubListView /> : <LoginContainer />;
+                return this.isLoggedIn() ? <ClubListView /> : <LoginView />;
               }}
             />
 
             <Route path='/club/:id/details'
               render={({match}) => {
-                return this.isLoggedIn() ? <ClubDetailsContainer club={match.params.id} /> : <LoginContainer />;
+                return this.isLoggedIn() ? <ClubDetailsContainer club={match.params.id} /> : <LoginView />;
               }}
             />
 
             <Route path='/club/:id/delete'
               render={() => {
-                return this.isLoggedIn() ? <DeleteClubView /> : <LoginContainer />;
+                return this.isLoggedIn() ? <DeleteClubView /> : <LoginView />;
               }}
             />
 
             <Route path='/club/:id/edit'
               render={() => {
-                return this.isLoggedIn() ? <EditClubView /> : <LoginContainer />;
+                return this.isLoggedIn() ? <EditClubView /> : <LoginView />;
               }}
             />
 
             <Route path='/club/create'
               render={() => {
-                return this.isLoggedIn() ? <CreateClubContainer /> : <LoginContainer />;
+                return this.isLoggedIn() ? <CreateClubContainer /> : <LoginView />;
               }}
             />
 
             <Route path='/user/:id/details'
               render={() => {
-                return this.isLoggedIn() ? <UserDetails /> : <LoginContainer />;
+                return this.isLoggedIn() ? <UserDetails /> : <LoginView />;
               }}
             />
 
@@ -95,9 +99,3 @@ class Router extends Component {
     );
   }
 }
-
-Router.propTypes = {
-  isLoggedIn: PropTypes.bool.isRequired
-};
-
-export default Router;

@@ -1,8 +1,8 @@
 import {REQUEST_LOGIN_BEGIN, REQUEST_LOGIN_ERROR, REQUEST_LOGIN_SUCCESS} from './actions';
 
 const initialState = {
-  isFetching: false,
-  error: null
+  isRequesting: false,
+  error: false
 };
 
 export default function loginReducer (state = initialState, action) {
@@ -10,19 +10,19 @@ export default function loginReducer (state = initialState, action) {
     case REQUEST_LOGIN_BEGIN:
       return {
         ...state,
-        isFetching: true,
-        error: null
+        isRequesting: true,
+        error: false
       };
     case REQUEST_LOGIN_SUCCESS:
       return {
         ...state,
-        isFetching: false,
-        error: null
+        isRequesting: false,
+        error: false
       };
     case REQUEST_LOGIN_ERROR:
       return {
         ...state,
-        isFetching: false,
+        isRequesting: false,
         error: action.error
       };
     default:

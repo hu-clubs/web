@@ -12,7 +12,7 @@ import {
 let initialState = {
   items: {},
   isFetching: false,
-  error: null,
+  error: false,
   lastUpdated: null,
   didInvalidate: false
 };
@@ -53,7 +53,7 @@ export default function readClubReducer (state = initialState, action) {
             ...state.items[clubId],
             data: action.club,
             isFetching: false,
-            error: null,
+            error: false,
             lastUpdated: action.receivedAt,
             didInvalidate: false
           }
@@ -82,7 +82,7 @@ export default function readClubReducer (state = initialState, action) {
       return {
         ...state,
         isFetching: true,
-        error: null,
+        error: false,
         didInvalidate: false
       };
     case FETCH_CLUB_LIST_SUCCESS:
@@ -90,7 +90,7 @@ export default function readClubReducer (state = initialState, action) {
         ...state,
         items: action.clubs,
         isFetching: false,
-        error: null,
+        error: false,
         lastUpdated: action.receivedAt,
         didInvalidate: false
       };

@@ -18,7 +18,7 @@ export const mapStateToProps = function (state, props) {
     return {
       club: null,
       isFetching: true,
-      error: null,
+      error: false,
       isEditFetching: false,
       isEditError: null
     };

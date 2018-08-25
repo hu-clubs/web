@@ -15,7 +15,7 @@ function WithRedux (WrappedComponent, id) {
       return {
         user: null,
         isFetching: true,
-        error: null
+        error: false
       };
     }
   };

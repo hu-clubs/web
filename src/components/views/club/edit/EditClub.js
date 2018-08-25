@@ -15,7 +15,10 @@ class EditClub extends Component {
   static propTypes = {
     club: PropTypes.object.isRequired,
     isFetching: PropTypes.bool,
-    error: PropTypes.object,
+    error: PropTypes.oneOfType([
+      PropTypes.object,
+      PropTypes.bool
+    ]).isRequired,
     onSave: PropTypes.func.isRequired,
     history: PropTypes.object.isRequired
   };

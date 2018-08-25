@@ -25,7 +25,10 @@ LoadingEditClub.propTypes = {
   onFetchClub: PropTypes.func.isRequired,
   onSave: PropTypes.func.isRequired,
   // isEditFetching: PropTypes.bool,
-  isEditError: PropTypes.object
+  isEditError: PropTypes.oneOfType([
+    PropTypes.object,
+    PropTypes.bool
+  ]).isRequired
 };
 
 export default LoadingEditClub;

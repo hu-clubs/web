@@ -141,7 +141,10 @@ class Register extends Component {
 
 Register.propTypes = {
   onSubmit: PropTypes.func.isRequired,
-  error: PropTypes.object,
+  error: PropTypes.oneOfType([
+    PropTypes.object,
+    PropTypes.bool
+  ]).isRequired,
   isFetching: PropTypes.bool
 };
 

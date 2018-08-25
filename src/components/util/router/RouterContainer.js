@@ -4,13 +4,10 @@ import Router from './Router';
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    isLoggedIn: state.authentication.jwt.token !== null,
-    ...ownProps
+    isLoggedIn: state.authentication.jwt.token !== null
   };
 };
 
-const RouterContainer = withRouter(connect(
+export default withRouter(connect(
   mapStateToProps
 )(Router));
-
-export default RouterContainer;

@@ -15,7 +15,7 @@ function WithRedux (WrappedComponent, id) {
       return {
         club: null,
         isFetching: true,
-        error: null
+        error: false
       };
     }
   };

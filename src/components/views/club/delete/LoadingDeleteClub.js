@@ -19,7 +19,10 @@ class LoadingDeleteClub extends Component {
 
 LoadingDeleteClub.propTypes = {
   isFetching: PropTypes.bool,
-  error: PropTypes.object,
+  error: PropTypes.oneOfType([
+    PropTypes.object,
+    PropTypes.bool
+  ]).isRequired,
   club: PropTypes.object,
   onFetchClub: PropTypes.func.isRequired,
   onDelete: PropTypes.func.isRequired

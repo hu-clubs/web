@@ -19,7 +19,10 @@ class LoadingClubList extends Component {
 
 LoadingClubList.propTypes = {
   isFetching: PropTypes.bool,
-  error: PropTypes.object,
+  error: PropTypes.oneOfType([
+    PropTypes.object,
+    PropTypes.bool
+  ]).isRequired,
   clubs: PropTypes.object.isRequired,
   onFetchClubs: PropTypes.func.isRequired
 };

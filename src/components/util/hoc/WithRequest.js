@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import React, {Component, Fragment} from 'react';
 import ErrorNotification from '../../fragments/errorNotification/ErrorNotification';
 
-export default function WithRequest (WrappedComponent, reduxKey) {
+export default function WithRequest (WrappedComponent) {
   return class extends Component {
     static propTypes = {
       isRequesting: PropTypes.bool.isRequired,
@@ -14,11 +14,11 @@ export default function WithRequest (WrappedComponent, reduxKey) {
     };
 
     render () {
-      let {isRequesting, error, ...props} = this.props;
+      let {isRequesting, error} = this.props;
       return (
         <Fragment>
           {!isRequesting && error && <ErrorNotification title={error.name} message={error.message} />}
-          <WrappedComponent {...props} />
+          <WrappedComponent {...this.props} />
         </Fragment>
       );
     }

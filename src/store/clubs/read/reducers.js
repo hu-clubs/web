@@ -39,7 +39,7 @@ export default function readClubReducer (state = initialState, action) {
           [clubId]: {
             ...state.items[clubId],
             isFetching: true,
-            error: null,
+            error: false,
             didInvalidate: false
           }
         }

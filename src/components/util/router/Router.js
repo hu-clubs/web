@@ -3,7 +3,7 @@ import React, {Component} from 'react';
 import {Redirect, Route, Switch} from 'react-router-dom';
 import LoginView from '../../views/authentication/login/LoginView';
 import LoginHelp from '../../views/authentication/loginHelp/LoginHelp';
-import ReduxRegister from '../../views/authentication/register/RegisterContainer';
+import RegisterView from '../../views/authentication/register/RegisterView';
 import RegisterHelp from '../../views/authentication/registerHelp/RegisterHelp';
 import CreateClubContainer from '../../views/club/create/CreateClubContainer';
 import DeleteClubView from '../../views/club/delete/DeleteClubView';
@@ -46,7 +46,7 @@ export default class Router extends Component {
 
             <Route path='/register' exact
               render={() => {
-                return this.isLoggedIn() ? <Redirect to='/' /> : <ReduxRegister />;
+                return this.isLoggedIn() ? <Redirect to='/' /> : <RegisterView />;
               }}
             />
 
@@ -61,7 +61,7 @@ export default class Router extends Component {
 
             <Route path='/club/:id/details'
               render={({match}) => {
-                return this.isLoggedIn() ? <ClubDetailsContainer club={match.params.id} /> : <LoginView />;
+                return this.isLoggedIn() ? <ClubDetailsContainer clubId={match.params.id} /> : <LoginView />;
               }}
             />
 

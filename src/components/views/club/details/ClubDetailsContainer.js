@@ -5,7 +5,7 @@ import WithLoading from '../../../util/hoc/WithLoading';
 import ClubDetails from './ClubDetails';
 
 const mapStateToProps = function (state, ownProps) {
-  let club = state.clubs.read.items[ownProps.club];
+  let club = state.clubs.read.items[ownProps.clubId];
   if (club) {
     return {
       club: club.data,
@@ -24,7 +24,7 @@ const mapStateToProps = function (state, ownProps) {
 const mapDispatchToProps = function (dispatch, ownProps) {
   return {
     onFetch: () => {
-      dispatch(fetchClubDetails(ownProps.club));
+      dispatch(fetchClubDetails(ownProps.clubId));
     }
   };
 };

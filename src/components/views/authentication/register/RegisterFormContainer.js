@@ -1,17 +1,17 @@
 import {connect} from 'react-redux';
 import {requestCreateUser} from '../../../../store/users/create/actions';
-import Register from './Register';
+import RegisterForm from './RegisterForm';
 
 const mapStateToProps = function (state) {
   return {
-    isFetching: state.users.create.isFetching,
+    isRequesting: state.users.create.isFetching,
     error: state.users.create.error
   };
 };
 
 const mapDispatchToProps = function (dispatch) {
   return {
-    onSubmit: (values, e, formApi) => {
+    onRequest: (values, e, formApi) => {
       dispatch(requestCreateUser(values.firstName, values.lastName, values.email, values.hNumber, values.password, true));
     }
   };
@@ -20,6 +20,6 @@ const mapDispatchToProps = function (dispatch) {
 const ReduxLogin = connect(
   mapStateToProps,
   mapDispatchToProps
-)(Register);
+)(RegisterForm);
 
 export default ReduxLogin;

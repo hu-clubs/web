@@ -1,6 +1,8 @@
 import {connect} from 'react-redux';
+import {compose} from 'redux';
 import {fetchClubList} from '../../../../store/clubs/read/actions';
-import LoadingClubList from './LoadingClubList';
+import WithLoading from '../../../util/hoc/WithLoading';
+import LoadingClubList from './ClubList';
 
 export const mapStateToProps = function (state) {
   return {
@@ -12,13 +14,18 @@ export const mapStateToProps = function (state) {
 
 const mapDispatchToProps = function (dispatch) {
   return {
-    onFetchClubs: () => {
+    onFetch: () => {
       dispatch(fetchClubList());
     }
   };
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(LoadingClubList);
+const enhance = compose(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  ),
+  WithLoading
+);
+
+export default enhance(LoadingClubList);

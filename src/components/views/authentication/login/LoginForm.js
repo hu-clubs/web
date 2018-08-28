@@ -5,17 +5,17 @@ import {Form, Text} from 'react-form';
 import {Link} from 'react-router-dom';
 import {validateEmail, validatePassword} from '../../../../validators';
 import ErrorNotification from '../../../fragments/errorNotification/ErrorNotification';
-import WithRequest from '../../../util/hoc/WithRequest';
 
 class LoginForm extends Component {
   render () {
+    let {isRequesting, error, onRequest} = this.props;
     return (
       <div>
         <h1 className='title is-1'>Login</h1>
-        {!this.props.isFetching && this.props.error &&
-        <ErrorNotification title={this.props.error.name} message={this.props.error.message}
-          stack={this.props.error.stack} />}
-        <Form onSubmit={this.props.onSubmit}
+        {!isRequesting && error &&
+        <ErrorNotification title={error.name} message={error.message}
+          stack={error.stack} />}
+        <Form onSubmit={onRequest}
           defaultValues={{email: 'jshepherd@harding.edu', password: 'mypassword'}}>
           {formApi => (
             <form onSubmit={formApi.submitForm}>
@@ -47,7 +47,8 @@ class LoginForm extends Component {
               </div>
               <div className='field'>
                 <div className='control'>
-                  <button className='button is-link'>Submit</button>
+                  <button className={classNames({'button': true, 'is-link': true, 'is-loading': isRequesting})}>Submit
+                  </button>
                 </div>
               </div>
               <div className='field is-grouped'>
@@ -69,9 +70,12 @@ class LoginForm extends Component {
 }
 
 LoginForm.propTypes = {
-  onSubmit: PropTypes.func.isRequired,
-  error: PropTypes.object,
-  isFetching: PropTypes.bool.isRequired
+  onRequest: PropTypes.func.isRequired,
+  error: PropTypes.oneOfType([
+    PropTypes.object,
+    PropTypes.bool
+  ]).isRequired,
+  isRequesting: PropTypes.bool.isRequired
 };
 
 export default LoginForm;

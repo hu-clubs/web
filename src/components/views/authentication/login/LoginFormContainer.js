@@ -24,7 +24,7 @@ const enhance = compose(
     mapStateToProps,
     mapDispatchToProps
   ),
-  WithRequest()
+  WithRequest
 );
 
 export default enhance(LoginForm);

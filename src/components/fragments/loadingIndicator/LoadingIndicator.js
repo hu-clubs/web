@@ -1,4 +1,4 @@
-import {faSpinner} from '@fortawesome/fontawesome-pro-regular';
+import {faSpinnerThird} from '@fortawesome/fontawesome-pro-regular';
 import FontAwesomeIcon from '@fortawesome/react-fontawesome';
 import PropTypes from 'prop-types';
 import React, {Component} from 'react';
@@ -36,7 +36,7 @@ class LoadingIndicator extends Component {
   render () {
     return this.state.render && (
       <div>
-        <FontAwesomeIcon icon={faSpinner} className='fa-spin fa-2x' />
+        <FontAwesomeIcon icon={faSpinnerThird} className='fa-spin fa-2x' />
       </div>
     );
   }

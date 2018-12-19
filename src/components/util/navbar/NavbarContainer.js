@@ -27,4 +27,4 @@ let enhance = compose(
   )
 );
 
-export default enhance(Navbar);
+export const NavbarContainer = enhance(Navbar);

@@ -8,6 +8,6 @@ const mapStateToProps = (state, ownProps) => {
   };
 };
 
-export default withRouter(connect(
+export const RootRouterContaner = withRouter(connect(
   mapStateToProps
 )(RootRouter));

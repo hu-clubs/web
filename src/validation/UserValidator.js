@@ -1,5 +1,8 @@
 // TODO improve validation with max length, regex, etc.
 
+// TODO use this in register form
+// TODO check if an email has been used
+// TODO regex for H number
 export function validateFirstName (value) {
   let error;
   if (!value) error = 'You must enter a first name';
@@ -13,14 +16,12 @@ export function validateLastName (value) {
 }
 
 // TODO check if an H number has been used
-// TODO regex for H number
 export function validateHNumber (value) {
   let error;
   if (!value) error = 'You must enter an H number';
   return error;
 }
 
-// TODO check if an email has been used
 export function validateEmail (value) {
   let error;
   if (!value) error = 'You must enter an email address';
@@ -34,7 +35,6 @@ export function validatePassword (value) {
   return error;
 }
 
-// TODO use this in register form
 export function validateConfirmPassword (password, confirmPassword) {
   let error;
   if (!confirmPassword) error = 'You must confirm your password';
@@ -42,20 +42,10 @@ export function validateConfirmPassword (password, confirmPassword) {
   return error;
 }
 
-export function validateClubName (value) {
-  let error;
-  if (!value) error = 'You must enter a club name';
-  return error;
-}
-
-export function validateClubShortName (value) {
-  let error;
-  if (!value) error = 'You must enter a club short name';
-  return error;
-}
-
-export function validateRegister (values) {
+export function validateRegistration (values) {
   let errors = {};
-  if (values.password) { errors.confirmPassword = validateConfirmPassword(values.password, values.confirmPassword); }
+  if (values.password) {
+    errors.confirmPassword = validateConfirmPassword(values.password, values.confirmPassword);
+  }
   return errors;
 }

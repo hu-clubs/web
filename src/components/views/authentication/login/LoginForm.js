@@ -3,8 +3,9 @@ import PropTypes from 'prop-types';
 import React, {Component} from 'react';
 import {Form, Text} from 'react-form';
 import {Link} from 'react-router-dom';
-import {validateEmail, validatePassword} from '../../../../validators';
+import {validateEmail} from '../../../../validation/UserValidator';
 import ErrorNotification from '../../../fragments/errorNotification/ErrorNotification';
+import { validatePassword } from '../../../../validation/UserValidator';
 
 class LoginForm extends Component {
   render () {

@@ -4,14 +4,15 @@ import React, {Component} from 'react';
 import {Form, Text} from 'react-form';
 import {Link} from 'react-router-dom';
 import {
-  validateEmail,
-  validateFirstName,
+  validateRegistration
+} from '../../../../validation/UserValidator';
+import ErrorNotification from '../../../fragments/errorNotification/ErrorNotification';
+import {
+  validateEmail, validateFirstName,
   validateHNumber,
   validateLastName,
-  validatePassword,
-  validateRegister
-} from '../../../../validators';
-import ErrorNotification from '../../../fragments/errorNotification/ErrorNotification';
+  validatePassword
+} from '../../../../validation/UserValidator';
 
 class RegisterForm extends Component {
   render () {
@@ -21,7 +22,7 @@ class RegisterForm extends Component {
         <h1 className='title is-1'>Register</h1>
         {!isRequesting && error && <ErrorNotification title={error.name} message={error.message} stack={error.stack} />}
         <Form onSubmit={onRequest}
-          validate={validateRegister}>
+          validate={validateRegistration}>
           {formApi => (
             <form onSubmit={formApi.submitForm}>
               <div className='field'>

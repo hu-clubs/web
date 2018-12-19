@@ -1,4 +1,4 @@
-import {faSpinnerThird} from '@fortawesome/fontawesome-pro-regular';
+import {faSpinnerThird} from '@fortawesome/pro-regular-svg-icons';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import PropTypes from 'prop-types';
 import React, {Component} from 'react';

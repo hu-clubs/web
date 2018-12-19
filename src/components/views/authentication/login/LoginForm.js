@@ -16,7 +16,7 @@ class LoginForm extends Component {
         <ErrorNotification title={error.name} message={error.message}
           stack={error.stack} />}
         <Form onSubmit={onRequest}
-          defaultValues={{email: 'jshepherd@harding.edu', password: 'mypassword'}}>
+          defaultValues={{email: 'jshepherd@harding.edu', password: 'password'}}>
           {formApi => (
             <form onSubmit={formApi.submitForm}>
               <div className='field'>

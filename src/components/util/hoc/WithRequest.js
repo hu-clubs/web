@@ -2,8 +2,12 @@ import PropTypes from 'prop-types';
 import React, {Component, Fragment} from 'react';
 import ErrorNotification from '../../fragments/errorNotification/ErrorNotification';
 
+function getDisplayName (WrappedComponent) {
+  return WrappedComponent.displayName || WrappedComponent.name || 'WithRequest';
+}
+
 export default function WithRequest (WrappedComponent) {
-  return class extends Component {
+  return class WithRequest extends Component {
     static propTypes = {
       isRequesting: PropTypes.bool.isRequired,
       error: PropTypes.oneOfType([
@@ -12,6 +16,8 @@ export default function WithRequest (WrappedComponent) {
       ]).isRequired,
       onRequest: PropTypes.func
     };
+
+    displayName = getDisplayName(WrappedComponent);
 
     render () {
       let {isRequesting, error} = this.props;

@@ -1,20 +1,20 @@
 import {faSpinnerThird} from '@fortawesome/fontawesome-pro-regular';
-import FontAwesomeIcon from '@fortawesome/react-fontawesome';
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import PropTypes from 'prop-types';
 import React, {Component} from 'react';
 
-class LoadingIndicator extends Component {
-  state = {
-    render: false,
-    timeoutId: null
-  };
-
+export default class LoadingIndicator extends Component {
   static propTypes = {
     delay: PropTypes.number
   };
 
   static defaultProps = {
     delay: 250
+  };
+
+  state = {
+    render: false,
+    timeoutId: null
   };
 
   componentDidMount () {
@@ -41,5 +41,3 @@ class LoadingIndicator extends Component {
     );
   }
 }
-
-export default LoadingIndicator;

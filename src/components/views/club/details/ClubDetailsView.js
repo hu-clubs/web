@@ -1,13 +1,19 @@
 import React, {Component} from 'react';
-import WideLayout from '../../../util/layout/WideLayout';
+import ExtraWideLayout from '../../../util/layout/ExtraWideLayout';
 import ClubDetailsContainer from './ClubDetailsContainer';
+import PropTypes from 'prop-types';
 
 export default class ClubDetailsView extends Component {
+  static propTypes = {
+    clubId: PropTypes.string.isRequired
+  };
+
   render () {
+    let {clubId} = this.props;
     return (
-      <WideLayout>
-        <ClubDetailsContainer />
-      </WideLayout>
+      <ExtraWideLayout>
+        <ClubDetailsContainer clubId={clubId} />
+      </ExtraWideLayout>
     );
   }
 }

@@ -1,9 +1,9 @@
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import React, {Component} from 'react';
 
 export default class ClubMeetings extends Component {
   static propTypes = {
-    club: PropTypes.object.isRequired
+    // club: PropTypes.object.isRequired
   };
 
   render () {
@@ -12,7 +12,7 @@ export default class ClubMeetings extends Component {
         <nav className='level'>
           <div className='level-left'>
             <div className='level-item'>
-              <h1 className='is-title is-size-3'>{this.props.club.name} Meetings</h1>
+              <h1 className='is-title is-size-3'>Meetings</h1>
             </div>
           </div>
           <div className='level-right'>

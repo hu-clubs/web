@@ -1,16 +1,20 @@
 import {connect} from 'react-redux';
+import {compose} from 'redux';
 import {requestDeleteClub} from '../../../../store/clubs/delete/actions';
 import {fetchClubDetails} from '../../../../store/clubs/read/actions';
-import LoadingDeleteClub from './LoadingDeleteClub';
+import WithLoading from '../../../util/hoc/WithLoading';
+import WithRequest from '../../../util/hoc/WithRequest';
+import DeleteClub from './DeleteClub';
+import {withRouter} from 'react-router-dom';
 
-export const mapStateToProps = function (state, props) {
-  // TODO this is a little hacky
-  let club = state.clubs.read.items[props.id];
+const loadingMapStateToProps = function (state, props) {
+  let {clubId} = props;
+  let club = state.clubs.read.items[clubId];
   if (club) {
     return {
-      club: state.clubs.read.items[props.id].data,
-      isFetching: state.clubs.read.items[props.id].isFetching,
-      error: state.clubs.read.items[props.id].error
+      club: club.data,
+      isFetching: club.isFetching,
+      error: club.error
     };
   } else {
     return {
@@ -21,20 +25,43 @@ export const mapStateToProps = function (state, props) {
   }
 };
 
-const mapDispatchToProps = function (dispatch, props) {
+const loadingMapDispatchToProps = function (dispatch, props) {
+  let {clubId} = props;
   return {
-    onFetchClub: () => {
-      dispatch(fetchClubDetails(props.id));
+    onFetch: () => {
+      dispatch(fetchClubDetails(clubId));
     },
-    onDelete: () => {
-      dispatch(requestDeleteClub(props.id));
+    onRequest: () => {
+      dispatch(requestDeleteClub(clubId));
     }
   };
 };
 
-let DeleteClubContainer = connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(LoadingDeleteClub);
+const requestMapStateToProps = function (state) {
+  return state.clubs.delete;
+};
 
-export default DeleteClubContainer;
+const requestMapDispatchToProps = function (dispatch, props) {
+  let {clubId} = props;
+  return {
+    onRequest: () => {
+      dispatch(requestDeleteClub(clubId));
+    }
+  };
+};
+
+const enhance = compose(
+  connect(
+    loadingMapStateToProps,
+    loadingMapDispatchToProps
+  ),
+  WithLoading,
+  connect(
+    requestMapStateToProps,
+    requestMapDispatchToProps
+  ),
+  WithRequest,
+  withRouter
+);
+
+export default enhance(DeleteClub);

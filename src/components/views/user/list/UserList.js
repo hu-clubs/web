@@ -4,7 +4,6 @@ import {Link} from 'react-router-dom';
 
 class UserList extends Component {
   render () {
-    console.log(this.props.users);
     let userListItems = Object.keys(this.props.users).map((key) => (
       <tr key={key}>
         <td>

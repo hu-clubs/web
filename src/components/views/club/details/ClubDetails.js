@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
-import ClubDetailsNavigation from './ClubDetailsNavigation';
-import ClubDetailsRouter from './ClubDetailsRouterContainer';
+import ClubDetailsNavigationContainer from './ClubDetailsNavigationContainer';
+import ClubDetailsRouterContainer from './ClubDetailsRouterContainer';
 import PropTypes from 'prop-types';
 
 export default class ClubDetails extends Component {
@@ -10,20 +10,18 @@ export default class ClubDetails extends Component {
 
   render () {
     let club = this.props.club;
-    let clubId = this.props.club._id;
+    let {_id} = club;
     return (
-      <section className='section'>
-        <div className='container'>
-          <div className='columns'>
-            <div className='column is-one-fifth'>
-              <ClubDetailsNavigation clubId={clubId} />
-            </div>
-            <div className='column is-four-fifths'>
-              <ClubDetailsRouter club={club} />
-            </div>
+      <div className='container'>
+        <div className='columns'>
+          <div className='column is-one-fifth'>
+            <ClubDetailsNavigationContainer clubId={_id} />
+          </div>
+          <div className='column is-four-fifths'>
+            <ClubDetailsRouterContainer club={club} />
           </div>
         </div>
-      </section>
+      </div>
     );
   }
 }

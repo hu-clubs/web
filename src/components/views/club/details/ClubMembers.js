@@ -30,7 +30,7 @@ export default class ClubMembers extends Component {
         <nav className='level'>
           <div className='level-left'>
             <div className='level-item'>
-              <h1 className='is-title is-size-3'>{this.props.club.name} Members</h1>
+              <h1 className='is-title is-size-3'>Members</h1>
             </div>
           </div>
           <div className='level-right'>

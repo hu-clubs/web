@@ -3,6 +3,10 @@ import React, {Component} from 'react';
 import ErrorNotification from '../../fragments/errorNotification/ErrorNotification';
 import LoadingIndicator from '../../fragments/loadingIndicator/LoadingIndicator';
 
+function getDisplayName (WrappedComponent) {
+  return WrappedComponent.displayName || WrappedComponent.name || 'WithRequest';
+}
+
 export default function WithLoading (WrappedComponent) {
   return class extends Component {
     static propTypes = {
@@ -13,6 +17,8 @@ export default function WithLoading (WrappedComponent) {
       ]).isRequired,
       onFetch: PropTypes.func.isRequired
     };
+
+    displayName = getDisplayName(WrappedComponent);
 
     loadData = () => {
       this.props.onFetch();

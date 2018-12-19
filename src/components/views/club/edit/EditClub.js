@@ -28,7 +28,6 @@ class EditClub extends Component {
   };
 
   render () {
-    console.log(this.props.history);
     let club = this.props.club;
     if (this.state.hasBeenSubmitted && !this.props.isFetching && !this.props.error) {
       return (<Redirect to='/club/list' />);

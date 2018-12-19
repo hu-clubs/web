@@ -1,9 +1,19 @@
 import PropTypes from 'prop-types';
 import React, {Component} from 'react';
 import {Redirect} from 'react-router-dom';
-import { withRouter } from 'react-router';
 
-class DeleteClub extends Component {
+export default class DeleteClub extends Component {
+  static propTypes = {
+    club: PropTypes.object.isRequired,
+    isRequesting: PropTypes.bool,
+    error: PropTypes.oneOfType([
+      PropTypes.object,
+      PropTypes.bool
+    ]).isRequired,
+    onRequest: PropTypes.func.isRequired,
+    history: PropTypes.object.isRequired
+  };
+
   constructor (props) {
     super(props);
     this.state = {
@@ -15,7 +25,7 @@ class DeleteClub extends Component {
     this.setState({
       hasBeenSubmitted: true
     });
-    this.props.onDelete();
+    this.props.onRequest();
   };
 
   onCancel = () => {
@@ -23,9 +33,9 @@ class DeleteClub extends Component {
   };
 
   render () {
-    console.log(this.props.history);
-    let club = this.props.club;
-    if (this.state.hasBeenSubmitted && !this.props.isFetching && !this.props.error) {
+    let {club, isRequesting, error} = this.props;
+    let {hasBeenSubmitted} = this.state;
+    if (hasBeenSubmitted && !isRequesting && !error) {
       return (<Redirect to='/club/list' />);
     }
     return (
@@ -35,7 +45,7 @@ class DeleteClub extends Component {
         </div>
         <div className='message-body'>
           <p className='confirmation-message'>
-            Are you sure you want to delete {club.name}? You cannot undo this action.
+            Are you sure you want to delete {club.name}? This action cannot be undone.
           </p>
           <nav className='level'>
             <div className='level-left' />
@@ -51,16 +61,3 @@ class DeleteClub extends Component {
     );
   }
 }
-
-DeleteClub.propTypes = {
-  club: PropTypes.object.isRequired,
-  isFetching: PropTypes.bool,
-  error: PropTypes.oneOfType([
-    PropTypes.object,
-    PropTypes.bool
-  ]).isRequired,
-  onDelete: PropTypes.func.isRequired,
-  history: PropTypes.object.isRequired
-};
-
-export default withRouter(DeleteClub);

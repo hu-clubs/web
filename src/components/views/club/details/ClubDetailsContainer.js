@@ -1,4 +1,5 @@
 import {connect} from 'react-redux';
+import {withRouter} from 'react-router-dom';
 import {compose} from 'redux';
 import {fetchClubDetails} from '../../../../store/clubs/read/actions';
 import WithLoading from '../../../util/hoc/WithLoading';
@@ -7,10 +8,11 @@ import ClubDetails from './ClubDetails';
 const mapStateToProps = function (state, ownProps) {
   let club = state.clubs.read.items[ownProps.clubId];
   if (club) {
+    let {data, isFetching, error} = club;
     return {
-      club: club.data,
-      isFetching: club.isFetching,
-      error: club.error
+      club: data,
+      isFetching: isFetching !== undefined ? isFetching : true,
+      error: error !== undefined ? isFetching : false
     };
   } else {
     return {
@@ -30,6 +32,7 @@ const mapDispatchToProps = function (dispatch, ownProps) {
 };
 
 let enhance = compose(
+  withRouter,
   connect(
     mapStateToProps,
     mapDispatchToProps

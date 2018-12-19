@@ -7,15 +7,13 @@ export default class EditClubView extends Component {
     let clubId = this.props.match.params.id;
     return (
       <div>
-        <section className='section'>
-          <div className='container'>
-            <div className='columns'>
-              <div className='column is-three-fifths is-offset-one-fifth'>
-                <EditClubContainer id={clubId} />
-              </div>
+        <div className='container'>
+          <div className='columns'>
+            <div className='column is-three-fifths is-offset-one-fifth'>
+              <EditClubContainer id={clubId} />
             </div>
           </div>
-        </section>
+        </div>
       </div>
     );
   }

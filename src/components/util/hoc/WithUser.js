@@ -1,5 +1,5 @@
 import connect from 'react-redux/es/connect/connect';
-import {fetchUser} from '../../../store/users/actions';
+import {fetchUserDetailsBegin} from '../../../store/users/read/actions';
 import WithLoading from './WithLoading';
 
 function WithRedux (WrappedComponent, id) {
@@ -23,7 +23,7 @@ function WithRedux (WrappedComponent, id) {
   const mapDispatchToProps = function (dispatch, props) {
     return {
       onFetch: () => {
-        dispatch(fetchUser(id));
+        dispatch(fetchUserDetailsBegin(id));
       }
     };
   };

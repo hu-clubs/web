@@ -9,6 +9,7 @@ export default class ClubDetailsNavigation extends Component {
 
   render () {
     let {clubId} = this.props;
+    let clubDetailsUrl = '/club/' + clubId + '/details/';
     return (
       <div>
         <aside className='menu'>
@@ -17,37 +18,37 @@ export default class ClubDetailsNavigation extends Component {
           </p>
           <ul className='menu-list'>
             <li>
-              <NavLink to={'/club/' + clubId + '/details/information'} activeClassName='is-active'>
+              <NavLink to={clubDetailsUrl + 'information'} activeClassName='is-active'>
                 Information
               </NavLink>
             </li>
             <li>
-              <NavLink to={'/club/' + clubId + '/details/announcements'} activeClassName='is-active'>
+              <NavLink to={clubDetailsUrl + 'announcements'} activeClassName='is-active'>
                 Announcements
               </NavLink>
             </li>
             <li>
-              <NavLink to={'/club/' + clubId + '/details/members'} activeClassName='is-active'>
+              <NavLink to={clubDetailsUrl + 'members'} activeClassName='is-active'>
                 Members
               </NavLink>
             </li>
             <li>
-              <NavLink to={'/club/' + clubId + '/details/meetings'} activeClassName='is-active'>
+              <NavLink to={clubDetailsUrl + 'meetings'} activeClassName='is-active'>
                 Meetings
               </NavLink>
             </li>
             <li>
-              <NavLink to={'/club/' + clubId + '/details/functions'} activeClassName='is-active'>
+              <NavLink to={clubDetailsUrl + 'functions'} activeClassName='is-active'>
                 Functions
               </NavLink>
             </li>
             <li>
-              <NavLink to={'/club/' + clubId + '/details/merch'} activeClassName='is-active'>
+              <NavLink to={clubDetailsUrl + 'merch'} activeClassName='is-active'>
                 Merch
               </NavLink>
             </li>
             <li>
-              <NavLink to={'/club/' + clubId + '/details/service'} activeClassName='is-active'>
+              <NavLink to={clubDetailsUrl + 'service'} activeClassName='is-active'>
                 Service Projects
               </NavLink>
             </li>
@@ -57,7 +58,7 @@ export default class ClubDetailsNavigation extends Component {
           </p>
           <ul className='menu-list'>
             <li>
-              <NavLink to={'/club/' + clubId + '/details/permissions'} activeClassName='is-active'>
+              <NavLink to={clubDetailsUrl + 'permissions'} activeClassName='is-active'>
                 Permissions
               </NavLink>
             </li>

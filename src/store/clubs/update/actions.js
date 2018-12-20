@@ -1,4 +1,4 @@
-import * as api from '../../../api/rest';
+import {clubApi} from '../../../api';
 
 export const REQUEST_UPDATE_CLUB_BEGIN = 'REQUEST_UPDATE_CLUB_BEGIN';
 export const REQUEST_UPDATE_CLUB_SUCCESS = 'REQUEST_UPDATE_CLUB_SUCCESS';
@@ -10,7 +10,7 @@ export function requestUpdateClub (club) {
     (async function () {
       dispatch(updateClubBegin());
       try {
-        await api.club.requestUpdateClub(jwt, club);
+        await clubApi.update(jwt, club);
         dispatch(updateClubSuccess());
       } catch (err) {
         dispatch(updateClubError(err));

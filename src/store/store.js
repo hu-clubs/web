@@ -1,32 +1,36 @@
-import {applyMiddleware, compose, createStore} from 'redux';
+import {applyMiddleware, createStore} from 'redux';
 import logger from 'redux-logger';
-import reduxThunk from 'redux-thunk';
-import { persistStore, persistReducer } from 'redux-persist';
-import storage from 'redux-persist/lib/storage';
-import { createFilter } from 'redux-persist-transform-filter';
+import thunk from 'redux-thunk';
+import {createFilter} from 'redux-persist-transform-filter';
+import storage from 'redux-persist/es/storage';
+import {persistStore, persistReducer} from 'redux-persist';
 import {rootReducer} from './reducers';
+import autoMergeLevel2 from 'redux-persist/lib/stateReconciler/autoMergeLevel2';
 
-const authenticationFilter = createFilter('authentication', ['jwt']);
+const jwtFilter = createFilter('authentication', ['jwt'], ['jwt']);
 
 const persistConfig = {
   key: 'root',
-  whitelist: ['authentication'],
   storage,
-  transforms: [authenticationFilter]
+  stateReconciler: autoMergeLevel2,
+  whitelist: [
+    'authentication'
+  ],
+  transforms: [
+    jwtFilter
+  ]
 };
 
-const persistedReducer = persistReducer(persistConfig, rootReducer);
-
-const enhancer = compose(
-  applyMiddleware(
-    reduxThunk,
-    logger
-  )
+const enhancer = applyMiddleware(
+  thunk,
+  logger
 );
+
+export const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 export const store = createStore(
   persistedReducer,
   enhancer
 );
 
-export const persistor = persistStore(store)
+export const persistor = persistStore(store);

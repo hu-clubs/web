@@ -1,4 +1,4 @@
-import * as api from '../../../api/rest';
+import {userApi} from '../../../api';
 
 export const FETCH_USER_DETAILS_BEGIN = 'FETCH_USER_DETAILS_BEGIN';
 export const FETCH_USER_DETAILS_SUCCESS = 'FETCH_USER_DETAILS_SUCCESS';
@@ -11,7 +11,7 @@ export function fetchUserDetails (userId) {
     (async function () {
       dispatch(fetchUserDetailsBegin(userId));
       try {
-        let user = await api.user.fetchUserDetails(jwt, userId);
+        let user = await userApi.readOne(jwt, userId);
         dispatch(fetchUserDetailsSuccess(userId, user));
       } catch (err) {
         dispatch(fetchUserDetailsError(userId, err));

@@ -1,4 +1,4 @@
-import * as api from '../../../api/rest';
+import {clubApi} from '../../../api';
 
 export const FETCH_CLUB_LIST_BEGIN = 'FETCH_CLUB_LIST_BEGIN';
 export const FETCH_CLUB_LIST_SUCCESS = 'FETCH_CLUB_LIST_SUCCESS';
@@ -16,7 +16,7 @@ export function fetchClubDetails (clubId) {
     (async function () {
       dispatch(fetchClubDetailsBegin(clubId));
       try {
-        let club = await api.club.fetchClubDetails(jwt, clubId);
+        let club = await clubApi.readOne(jwt, clubId);
         dispatch(fetchClubDetailsSuccess(clubId, club));
       } catch (err) {
         dispatch(fetchClubDetailsError(clubId, err));
@@ -55,7 +55,7 @@ export function fetchClubList () {
     (async function () {
       dispatch(fetchClubListBegin());
       try {
-        let clubs = await api.club.fetchClubList(jwt);
+        let clubs = await api.club.ClubApiClient.readAll(jwt);
         dispatch(fetchClubListSuccess(clubs));
       } catch (err) {
         dispatch(fetchClubListError(err));

@@ -1,5 +1,5 @@
-import * as api from '../../../api/rest';
 import {setJwt} from '../jwt/actions';
+import {authenticationApi} from '../../../api';
 
 export const REQUEST_LOGIN_BEGIN = 'REQUEST_LOGIN_BEGIN';
 export const REQUEST_LOGIN_SUCCESS = 'REQUEST_LOGIN_SUCCESS';
@@ -10,7 +10,7 @@ export function login (email, password) {
     (async function () {
       dispatch(loginBegin());
       try {
-        let json = await api.authentication.login(email, password);
+        let json = await authenticationApi.login(email, password);
         let token = json.token;
         dispatch(loginSuccess());
         dispatch(setJwt(token));

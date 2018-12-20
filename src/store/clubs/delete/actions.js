@@ -1,4 +1,4 @@
-import * as api from '../../../api/rest';
+import {clubApi} from '../../../api';
 
 export const REQUEST_DELETE_CLUB_BEGIN = 'REQUEST_DELETE_CLUB_BEGIN';
 export const REQUEST_DELETE_CLUB_SUCCESS = 'REQUEST_DELETE_CLUB_SUCCESS';
@@ -10,7 +10,7 @@ export function requestDeleteClub (id) {
     (async function () {
       dispatch(deleteClubBegin());
       try {
-        await api.club.requestDeleteClub(jwt, id);
+        await clubApi.delete(jwt, id);
         dispatch(deleteClubSuccess());
       } catch (err) {
         dispatch(deleteClubError(err));

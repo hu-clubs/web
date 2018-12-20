@@ -1,11 +1,11 @@
-import { persistor, store } from '../store/store';
-import { HashRouter } from 'react-router-dom';
-import { Provider } from 'react-redux';
+import {store, persistor} from '../store/store';
+import {HashRouter} from 'react-router-dom';
+import {Provider} from 'react-redux';
 import React from 'react';
 import Footer from './util/footer/Footer';
-import { NavbarContainer } from './util/navbar/NavbarContainer';
-import { RootRouterContaner } from './util/router/RootRouterContainer';
-import { PersistGate } from 'redux-persist/integration/react';
+import {NavbarContainer} from './util/navbar/NavbarContainer';
+import {RootRouterContaner} from './util/router/RootRouterContainer';
+import {PersistGate} from 'redux-persist/integration/react';
 import './App.css';
 import LoadingIndicator from './fragments/loadingIndicator/LoadingIndicator';
 
@@ -23,5 +23,6 @@ export function App () {
           </div>
         </HashRouter>
       </PersistGate>
-    </Provider>);
+    </Provider>
+  );
 }

@@ -1,13 +1,13 @@
 import {connect} from 'react-redux';
-import {removeJwt} from '../../../store/authentication/jwt/actions';
+import {removeJwt} from '../../../store/authentication/user/actions';
 import Navbar from './Navbar';
 import {compose} from 'redux';
 import {withRouter} from 'react-router-dom';
 
 const mapStateToProps = (state) => {
   return {
-    isLoggedIn: state.authentication.jwt.token !== null,
-    ...state.authentication.jwt.decoded
+    isLoggedIn: state.authentication.user.token.jwt !== null,
+    ...state.authentication.user.token.decoded
   };
 };
 

@@ -7,7 +7,7 @@ import {persistStore, persistReducer} from 'redux-persist';
 import {rootReducer} from './reducers';
 import autoMergeLevel2 from 'redux-persist/lib/stateReconciler/autoMergeLevel2';
 
-const jwtFilter = createFilter('authentication', ['jwt'], ['jwt']);
+const jwtFilter = createFilter('authentication', ['user'], ['user']);
 
 const persistConfig = {
   key: 'root',

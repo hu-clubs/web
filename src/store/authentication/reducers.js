@@ -1,8 +1,8 @@
 import {combineReducers} from 'redux';
-import jwtReducer from './jwt/reducers';
+import userReducer from './user/reducers';
 import loginReducer from './login/reducers';
 
 export const authenticationReducer = combineReducers({
   login: loginReducer,
-  jwt: jwtReducer
+  user: userReducer
 });

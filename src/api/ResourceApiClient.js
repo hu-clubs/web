@@ -9,7 +9,7 @@ export class ResourceApiClient {
 
   create (jwt, attributes) {
     return postApi(this.url, {
-      jwt,
+      jwt: jwt,
       body: {
         ...attributes
       }
@@ -18,19 +18,19 @@ export class ResourceApiClient {
 
   readAll (jwt) {
     return getApi(this.url, {
-      jwt
+      jwt: jwt
     });
   }
 
   readOne (jwt, id) {
     return getApi(this.url + '/' + id, {
-      jwt
+      jwt: jwt
     });
   }
 
   update (jwt, resource) {
     return patchApi(this.url + '/' + resource._id, {
-      jwt,
+      jwt: jwt,
       body: {
         ...resource
       }
@@ -39,7 +39,7 @@ export class ResourceApiClient {
 
   delete (jwt, id) {
     return deleteApi(this.url + '/' + id, {
-      jwt
+      jwt: jwt
     });
   }
 }

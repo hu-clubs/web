@@ -1,4 +1,5 @@
 import {clubApi} from '../../../api';
+import {getJwt} from '../../authentication/utils';
 
 export const REQUEST_UPDATE_CLUB_BEGIN = 'REQUEST_UPDATE_CLUB_BEGIN';
 export const REQUEST_UPDATE_CLUB_SUCCESS = 'REQUEST_UPDATE_CLUB_SUCCESS';
@@ -6,7 +7,7 @@ export const REQUEST_UPDATE_CLUB_ERROR = 'REQUEST_UPDATE_CLUB_ERROR';
 
 export function requestUpdateClub (club) {
   return function (dispatch, getState) {
-    let jwt = getState().authentication.jwt.token;
+    let jwt = getJwt(getState);
     (async function () {
       dispatch(updateClubBegin());
       try {

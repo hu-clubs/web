@@ -1,9 +1,4 @@
-import {
-  FETCH_USER_DETAILS_BEGIN,
-  FETCH_USER_DETAILS_ERROR,
-  FETCH_USER_DETAILS_SUCCESS,
-  INVALIDATE_USER_DETAILS
-} from './actions';
+import { actions } from './actions';
 
 let initialState = {
   items: {}
@@ -12,7 +7,7 @@ let initialState = {
 export default function readUserReducer (state = initialState, action) {
   let userId = action.userId;
   switch (action.type) {
-    case INVALIDATE_USER_DETAILS:
+    case actions.invalidate:
       return {
         ...state,
         items: {
@@ -23,7 +18,7 @@ export default function readUserReducer (state = initialState, action) {
           }
         }
       };
-    case FETCH_USER_DETAILS_BEGIN:
+    case actions.begin:
       return {
         ...state,
         items: {
@@ -36,7 +31,7 @@ export default function readUserReducer (state = initialState, action) {
           }
         }
       };
-    case FETCH_USER_DETAILS_SUCCESS:
+    case actions.success:
       return {
         ...state,
         items: {
@@ -51,7 +46,7 @@ export default function readUserReducer (state = initialState, action) {
           }
         }
       };
-    case FETCH_USER_DETAILS_ERROR:
+    case actions.error:
       return {
         ...state,
         items: {

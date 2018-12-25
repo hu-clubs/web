@@ -2,10 +2,10 @@ import * as classNames from 'classnames';
 import PropTypes from 'prop-types';
 import React, {Component} from 'react';
 import {Form, Text} from 'react-form';
-import {validateClubName} from '../../../../validation/ClubValidator';
+import {validateClubName} from '../../../../validation/clubValidators';
 import ErrorNotification from '../../../fragments/errorNotification/ErrorNotification';
 import {Redirect} from 'react-router-dom';
-import { validateClubShortName } from '../../../../validation/ClubValidator';
+import { validateClubShortName } from '../../../../validation/clubValidators';
 
 export default class CreateClub extends Component {
   static propTypes = {

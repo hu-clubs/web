@@ -1,5 +1,6 @@
-import {setJwt} from '../../authentication/jwt/actions';
+import {setJwt} from '../../authentication/user/actions';
 import {userApi} from '../../../api';
+import {getJwt} from '../../authentication/utils';
 
 export const REQUEST_CREATE_USER_BEGIN = 'REQUEST_CREATE_USER_BEGIN';
 export const REQUEST_CREATE_USER_SUCCESS = 'REQUEST_CREATE_USER_SUCCESS';
@@ -7,7 +8,7 @@ export const REQUEST_CREATE_USER_ERROR = 'REQUEST_CREATE_USER_ERROR';
 
 export function requestCreateUser (firstName, lastName, email, hNumber, password, register) {
   return function (dispatch, getState) {
-    let jwt = register ? null : getState().authentication.jwt.token;
+    let jwt = register ? null : getJwt(getState);
     (async function () {
       dispatch(createUserBegin());
       try {
@@ -21,7 +22,7 @@ export function requestCreateUser (firstName, lastName, email, hNumber, password
         });
         dispatch(createUserSuccess());
         if (register) {
-          dispatch(setJwt(json.token));
+          dispatch(setJwt(json.jwt));
         }
       } catch (err) {
         dispatch(createUserError(err));

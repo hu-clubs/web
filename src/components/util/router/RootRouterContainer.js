@@ -4,7 +4,7 @@ import RootRouter from './RootRouter';
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    isLoggedIn: state.authentication.jwt.token !== null
+    isLoggedIn: state.authentication.user.token.jwt !== null
   };
 };
 

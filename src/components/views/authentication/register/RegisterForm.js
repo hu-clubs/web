@@ -5,14 +5,14 @@ import {Form, Text} from 'react-form';
 import {Link} from 'react-router-dom';
 import {
   validateRegistration
-} from '../../../../validation/UserValidator';
+} from '../../../../validation/userValidators';
 import ErrorNotification from '../../../fragments/errorNotification/ErrorNotification';
 import {
   validateEmail, validateFirstName,
   validateHNumber,
   validateLastName,
   validatePassword
-} from '../../../../validation/UserValidator';
+} from '../../../../validation/userValidators';
 
 class RegisterForm extends Component {
   render () {

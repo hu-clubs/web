@@ -4,9 +4,9 @@ import React, {Component} from 'react';
 import {Form, Text} from 'react-form';
 import {Redirect} from 'react-router-dom';
 import { withRouter } from 'react-router';
-import {validateClubName} from '../../../../validation/ClubValidator';
+import {validateClubName} from '../../../../validation/clubValidators';
 import ErrorNotification from '../../../fragments/errorNotification/ErrorNotification';
-import { validateClubShortName } from '../../../../validation/ClubValidator';
+import { validateClubShortName } from '../../../../validation/clubValidators';
 
 class EditClub extends Component {
   state = {

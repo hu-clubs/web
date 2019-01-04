@@ -1,6 +1,6 @@
 import {connect} from 'react-redux';
 import {compose} from 'redux';
-import {login} from '../../../../store/authentication/login/actions';
+import {login} from '../../../../store/features/authentication/login/actions';
 import WithRequest from '../../../util/hoc/WithRequest';
 import LoginForm from './LoginForm';
 

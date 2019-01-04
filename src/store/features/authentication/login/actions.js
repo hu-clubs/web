@@ -1,5 +1,5 @@
 import {setJwt} from '../user/actions';
-import {authenticationApi} from '../../../api';
+import {authenticationApi} from '../../../../api';
 
 export const REQUEST_LOGIN_BEGIN = 'REQUEST_LOGIN_BEGIN';
 export const REQUEST_LOGIN_SUCCESS = 'REQUEST_LOGIN_SUCCESS';

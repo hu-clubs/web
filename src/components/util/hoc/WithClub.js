@@ -1,5 +1,5 @@
 import connect from 'react-redux/es/connect/connect';
-import {fetchClubDetails} from '../../../store/clubs/read/actions';
+import {fetchClubDetails} from '../../../store/features/clubs/read/actions';
 import WithLoading from './WithLoading';
 
 function WithRedux (WrappedComponent, id) {

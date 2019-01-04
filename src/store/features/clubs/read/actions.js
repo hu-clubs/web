@@ -1,4 +1,4 @@
-import {clubApi} from '../../../api';
+import {clubApi} from '../../../../api';
 import {getJwt} from '../../authentication/utils';
 
 export const FETCH_CLUB_LIST_BEGIN = 'FETCH_CLUB_LIST_BEGIN';
@@ -13,7 +13,7 @@ export const INVALIDATE_CLUB_DETAILS = 'INVALIDATE_CLUB_DETAILS';
 
 export function fetchClubDetails (clubId) {
   return function (dispatch, getState) {
-    let jwt = getJwt(getState);
+    let jwt = getJwt(getState());
     (async function () {
       dispatch(fetchClubDetailsBegin(clubId));
       try {
@@ -52,7 +52,7 @@ export function fetchClubDetailsError (clubId, error) {
 
 export function fetchClubList () {
   return function (dispatch, getState) {
-    let jwt = getJwt(getState);
+    let jwt = getJwt(getState());
     (async function () {
       dispatch(fetchClubListBegin());
       try {

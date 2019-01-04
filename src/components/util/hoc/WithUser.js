@@ -1,5 +1,5 @@
 import connect from 'react-redux/es/connect/connect';
-import {fetchUserDetailsBegin} from '../../../store/users/read/actions';
+import {fetchUserDetailsBegin} from '../../../store/features/users/read/actions';
 import WithLoading from './WithLoading';
 
 function WithRedux (WrappedComponent, id) {

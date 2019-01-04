@@ -1,5 +1,5 @@
 import {connect} from 'react-redux';
-import {requestCreateUser} from '../../../../store/users/create/actions';
+import {requestCreateUser} from '../../../../store/features/users/create/actions';
 import RegisterForm from './RegisterForm';
 
 const mapStateToProps = function (state) {

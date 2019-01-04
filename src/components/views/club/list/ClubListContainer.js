@@ -1,6 +1,6 @@
 import {connect} from 'react-redux';
 import {compose} from 'redux';
-import {fetchClubList} from '../../../../store/clubs/read/actions';
+import {fetchClubList} from '../../../../store/features/clubs/read/actions';
 import WithLoading from '../../../util/hoc/WithLoading';
 import LoadingClubList from './ClubList';
 

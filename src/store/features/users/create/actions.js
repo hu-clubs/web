@@ -1,5 +1,5 @@
 import {setJwt} from '../../authentication/user/actions';
-import {userApi} from '../../../api';
+import {userApi} from '../../../../api';
 import {getJwt} from '../../authentication/utils';
 
 export const REQUEST_CREATE_USER_BEGIN = 'REQUEST_CREATE_USER_BEGIN';
@@ -8,7 +8,7 @@ export const REQUEST_CREATE_USER_ERROR = 'REQUEST_CREATE_USER_ERROR';
 
 export function requestCreateUser (firstName, lastName, email, hNumber, password, register) {
   return function (dispatch, getState) {
-    let jwt = register ? null : getJwt(getState);
+    let jwt = register ? null : getJwt(getState());
     (async function () {
       dispatch(createUserBegin());
       try {

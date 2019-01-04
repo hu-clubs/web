@@ -1,12 +1,12 @@
-import {userApi} from '../../../api';
+import {userApi} from '../../../../api';
 import {getJwt} from '../../authentication/utils';
-import {createFetchActions} from '../../util';
+import {createFetchActions} from '../../../utils';
 
 export const actions = createFetchActions('USER_DETAILS');
 
 export function fetchUserDetails (userId) {
   return async function (dispatch, getState) {
-    let jwt = getJwt(getState);
+    let jwt = getJwt(getState());
     dispatch(fetchUserDetailsBegin(userId));
     try {
       let user = await userApi.readOne(jwt, userId);

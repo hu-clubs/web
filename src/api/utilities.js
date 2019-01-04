@@ -1,6 +1,6 @@
 import fetch from 'cross-fetch';
 
-const API_URL = process.env.REACT_APP_API_URL;
+export const API_URL = process.env.REACT_APP_API_URL;
 
 const HTTP_METHODS = {
   GET: 'GET',

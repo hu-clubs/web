@@ -1,6 +1,6 @@
 import {connect} from 'react-redux';
-import {requestUpdateClub} from '../../../../store/clubs/update/actions';
-import {fetchClubDetails} from '../../../../store/clubs/read/actions';
+import {requestUpdateClub} from '../../../../store/features/clubs/update/actions';
+import {fetchClubDetails} from '../../../../store/features/clubs/read/actions';
 import LoadingEditClub from './LoadingEditClub';
 
 export const mapStateToProps = function (state, props) {

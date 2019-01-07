@@ -38,8 +38,6 @@
     "react-scripts": "2.1.1",
     "redux": "^4.0.1",
     "redux-api-middleware": "^3.0.1",
-    "redux-localstorage": "^0.4.1",
-    "redux-localstorage-filter": "^0.1.1",
     "redux-logger": "^3.0.6",
     "redux-persist": "^5.10.0",
     "redux-persist-transform-filter": "0.0.18",

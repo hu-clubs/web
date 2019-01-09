@@ -1,5 +1,6 @@
 import {RSAA} from 'redux-api-middleware';
-import {actionTypesToRsaaArray, createRsaaActionTypes} from '../../utils/crud/actions';
+import {actionTypesToRsaaArray} from '../../utils/rsaa';
+import {createRsaaActionTypes} from '../../utils/rsaa';
 
 export const loginActionTypes = createRsaaActionTypes('LOGIN', 'USER');
 export const REMOVE_JWT = 'REMOVE_JWT';

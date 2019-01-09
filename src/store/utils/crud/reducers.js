@@ -1,3 +1,10 @@
+import {createRsaaReducer} from '../rsaa';
+
+/**
+ * Creates reducers for each CRUD action
+ * @param actions {{fetchList: {success: string, error: string, begin: string}, fetchDetails: {success: string, error: string, begin: string}, create: {success: string, error: string, begin: string}, update: {success: string, error: string, begin: string}, delete: {success: string, error: string, begin: string}}}
+ * @returns {{read: *, create: *, update: *, delete: *}}
+ */
 export function createCrudReducers (actions) {
   return {
     create: createRsaaReducer(actions.create),
@@ -77,39 +84,6 @@ function createReadReducer (fetchListActions, fetchDetailsActions) {
               error: action.payload
             }
           }
-        };
-      default:
-        return state;
-    }
-  };
-}
-
-const rsaaInitialState = {
-  isFetching: false,
-  error: null
-};
-
-// This is a reducer who only tracks RSAA request status
-export function createRsaaReducer (actions) {
-  return (state = rsaaInitialState, action) => {
-    switch (action) {
-      case actions.begin:
-        return {
-          ...state,
-          isFetching: true,
-          error: null
-        };
-      case actions.success:
-        return {
-          ...state,
-          isFetching: false,
-          error: null
-        };
-      case actions.error:
-        return {
-          ...state,
-          isFetching: false,
-          error: action.payload
         };
       default:
         return state;

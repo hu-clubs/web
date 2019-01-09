@@ -21,3 +21,39 @@ export function createRsaaActionTypes (action, resource) {
 export function actionTypesToRsaaArray (types) {
   return [types.begin, types.success, types.error];
 }
+
+/**
+ * Creates a reducer for basic RSAA requests (i.e. requests which only care about fetching and error status)
+ * @param actions {{success: string, error: string, begin: string}}
+ * @returns {Function}
+ */
+export function createRsaaReducer (actions) {
+  const initialState = {
+    isFetching: false,
+    error: null
+  };
+  return (state = initialState, action) => {
+    switch (action) {
+      case actions.begin:
+        return {
+          ...state,
+          isFetching: true,
+          error: null
+        };
+      case actions.success:
+        return {
+          ...state,
+          isFetching: false,
+          error: null
+        };
+      case actions.error:
+        return {
+          ...state,
+          isFetching: false,
+          error: action.payload
+        };
+      default:
+        return state;
+    }
+  };
+}

@@ -1,6 +1,5 @@
 import {connect} from 'react-redux';
-import {requestUpdateClub} from '../../../../store/features/clubs/update/actions';
-import {fetchClubDetails} from '../../../../store/features/clubs/read/actions';
+import {updateClub, fetchClubDetails} from '../../../../store/features/clubs/actions';
 import LoadingEditClub from './LoadingEditClub';
 
 export const mapStateToProps = function (state, props) {
@@ -31,7 +30,7 @@ const mapDispatchToProps = function (dispatch, props) {
       dispatch(fetchClubDetails(props.id));
     },
     onSave: (club) => {
-      dispatch(requestUpdateClub(club));
+      dispatch(updateClub(club));
     }
   };
 };

@@ -1,8 +1,12 @@
 import {combineReducers} from 'redux';
-import createUserReducer from './create/reducers';
-import userDetailsReducer from './read/reducers';
+import {createCrudReducers} from '../../utils/crud/reducers';
+import {actionTypes} from './actions';
+
+const reducers = createCrudReducers(actionTypes);
 
 export const usersReducer = combineReducers({
-  create: createUserReducer,
-  read: userDetailsReducer
+  create: reducers.create,
+  delete: reducers.delete,
+  read: reducers.read,
+  update: reducers.update
 });

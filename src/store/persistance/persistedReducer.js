@@ -4,7 +4,7 @@ import {rootReducer} from '../reducers';
 import {persistReducer} from 'redux-persist';
 import {createFilter} from 'redux-persist-transform-filter';
 
-const jwtFilter = createFilter('authentication', ['user'], ['user']);
+const jwtFilter = createFilter('authentication', ['token'], ['token']);
 
 const persistConfig = {
   key: 'root',

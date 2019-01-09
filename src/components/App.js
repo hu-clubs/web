@@ -1,4 +1,4 @@
-import {store, persistor} from '../store/store';
+import {store} from '../store/store';
 import {HashRouter} from 'react-router-dom';
 import {Provider} from 'react-redux';
 import React from 'react';
@@ -8,6 +8,7 @@ import {RootRouterContaner} from './util/router/RootRouterContainer';
 import {PersistGate} from 'redux-persist/integration/react';
 import './App.css';
 import LoadingIndicator from './fragments/loadingIndicator/LoadingIndicator';
+import {persistor} from '../store/persistance/persistedStore';
 
 export function App () {
   return (

@@ -3,9 +3,8 @@ import PropTypes from 'prop-types';
 import React, {Component} from 'react';
 import {Form, Text} from 'react-form';
 import {Link} from 'react-router-dom';
-import {validateEmail} from '../../../../validation/userValidators';
+import {validateEmail, validatePassword} from '../../../../validation/userValidators';
 import ErrorNotification from '../../../fragments/errorNotification/ErrorNotification';
-import { validatePassword } from '../../../../validation/userValidators';
 
 class LoginForm extends Component {
   render () {
@@ -17,7 +16,7 @@ class LoginForm extends Component {
         <ErrorNotification title={error.name} message={error.message}
           stack={error.stack} />}
         <Form onSubmit={onRequest}
-          defaultValues={{email: 'jshepherd@harding.edu', password: 'password'}}>
+          defaultValues={{email: 'jshepherd@harding.edu', password: 'mypassword'}}>
           {formApi => (
             <form onSubmit={formApi.submitForm}>
               <div className='field'>

@@ -1,7 +1,7 @@
 import {connect} from 'react-redux';
 import {withRouter} from 'react-router-dom';
 import {compose} from 'redux';
-import {fetchClubDetails} from '../../../../store/features/clubs/read/actions';
+import {fetchClubDetails} from '../../../../store/features/clubs/actions';
 import WithLoading from '../../../util/hoc/WithLoading';
 import ClubDetails from './ClubDetails';
 

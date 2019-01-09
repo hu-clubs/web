@@ -1,7 +1,6 @@
 import {connect} from 'react-redux';
 import {compose} from 'redux';
-import {requestDeleteClub} from '../../../../store/features/clubs/delete/actions';
-import {fetchClubDetails} from '../../../../store/features/clubs/read/actions';
+import {deleteClub, fetchClubDetails} from '../../../../store/features/clubs/actions';
 import WithLoading from '../../../util/hoc/WithLoading';
 import WithRequest from '../../../util/hoc/WithRequest';
 import DeleteClub from './DeleteClub';
@@ -32,7 +31,7 @@ const loadingMapDispatchToProps = function (dispatch, props) {
       dispatch(fetchClubDetails(clubId));
     },
     onRequest: () => {
-      dispatch(requestDeleteClub(clubId));
+      dispatch(deleteClub(clubId));
     }
   };
 };
@@ -45,7 +44,7 @@ const requestMapDispatchToProps = function (dispatch, props) {
   let {clubId} = props;
   return {
     onRequest: () => {
-      dispatch(requestDeleteClub(clubId));
+      dispatch(deleteClub(clubId));
     }
   };
 };

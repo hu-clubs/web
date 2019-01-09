@@ -1,13 +1,13 @@
 import {connect} from 'react-redux';
 import {compose} from 'redux';
-import {login} from '../../../../store/features/authentication/login/actions';
+import {login} from '../../../../store/features/authentication/actions';
 import WithRequest from '../../../util/hoc/WithRequest';
 import LoginForm from './LoginForm';
 
 const mapStateToProps = function (state) {
   return {
-    isRequesting: state.authentication.login.isRequesting,
-    error: state.authentication.login.error
+    isRequesting: state.authentication.isFetching,
+    error: state.authentication.error
   };
 };
 

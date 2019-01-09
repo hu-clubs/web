@@ -1,14 +1,17 @@
-import {isRSAA} from 'redux-api-middleware';
+import {isRSAA, RSAA} from 'redux-api-middleware';
 
 export const jwtMiddleware = ({getState}) => next => action => {
   if (isRSAA(action)) {
-    const jwt = getState().authentication.user.token.jwt;
+    const jwt = getState().authentication.token.jwt;
     if (jwt) {
       const actionWithJwt = {
         ...action,
-        headers: {
-          ...action.headers,
-          'Authorization': 'Bearer ' + jwt
+        [RSAA]: {
+          ...action[RSAA],
+          headers: {
+            ...action.headers,
+            'Authorization': 'Bearer ' + jwt
+          }
         }
       };
       return next(actionWithJwt);

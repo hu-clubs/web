@@ -6,11 +6,13 @@ import {apiMiddleware} from 'redux-api-middleware';
 import {jwtMiddleware} from './middleware/rsaaJwtMiddleware';
 import {contentTypeMiddleware} from './middleware/rsaaContentTypeMiddleware';
 import {endpointMiddleware} from './middleware/rsaaEndpointMiddleware';
+import {bodyStringifyMiddleware} from './middleware/rsaaBodyStringifyMiddleware';
 
 // TODO combine RSAA middlewares into one
 const enhancer = applyMiddleware(
   thunk,
   jwtMiddleware,
+  bodyStringifyMiddleware,
   contentTypeMiddleware,
   endpointMiddleware,
   apiMiddleware,

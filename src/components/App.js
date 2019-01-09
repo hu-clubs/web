@@ -2,12 +2,12 @@ import {store} from '../store/store';
 import {HashRouter} from 'react-router-dom';
 import {Provider} from 'react-redux';
 import React from 'react';
-import Footer from './util/footer/Footer';
-import {NavbarContainer} from './util/navbar/NavbarContainer';
-import {RootRouterContaner} from './util/router/RootRouterContainer';
+import Footer from './footer/Footer';
+import {NavbarContainer} from './navbar/NavbarContainer';
+import {RootRouterContaner} from './router/RootRouterContainer';
 import {PersistGate} from 'redux-persist/integration/react';
 import './App.css';
-import LoadingIndicator from './fragments/loadingIndicator/LoadingIndicator';
+import LoadingIndicator from './common/loadingIndicator/LoadingIndicator';
 import {persistor} from '../store/persistance/persistedStore';
 
 export function App () {

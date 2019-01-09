@@ -17,11 +17,11 @@ export function createCrudReducers (actions) {
 function createReadReducer (fetchListActions, fetchDetailsActions) {
   const initialState = {
     isFetching: false,
-    error: null,
+    error: false,
     items: {}
   };
   return (state = initialState, action) => {
-    switch (action) {
+    switch (action.type) {
       case fetchListActions.begin:
         return {
           ...state,
@@ -65,14 +65,15 @@ function createReadReducer (fetchListActions, fetchDetailsActions) {
           ...state,
           items: {
             ...state.items,
-            [action.id]: {
-              ...state.items[action.id],
+            [action.payload._id]: {
+              ...state.items[action._id],
               data: action.payload,
               isFetching: false,
               error: null
             }
           }
         };
+      // TODO this will not work. The ID is not sent in the action
       case fetchDetailsActions.error:
         return {
           ...state,

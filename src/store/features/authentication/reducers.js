@@ -33,7 +33,7 @@ export function authenticationReducer (state = initialState, action) {
         isFetching: false,
         error: false,
         token: {
-          token,
+          jwt: token,
           decodedJwt
         }
       };

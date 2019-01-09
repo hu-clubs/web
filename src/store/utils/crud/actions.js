@@ -8,11 +8,11 @@ import {actionTypesToRsaaArray, createRsaaActionTypes} from '../rsaa';
  */
 export function createCrudActionTypes (resource) {
   return {
-    create: createRsaaActionTypes('CREATE', resource),
-    fetchList: createRsaaActionTypes('READ_LIST', resource),
-    fetchDetails: createRsaaActionTypes('READ_DETAILS', resource),
-    update: createRsaaActionTypes('UPDATE', resource),
-    delete: createRsaaActionTypes('DELETE', resource)
+    create: createRsaaActionTypes('CREATE_' + resource),
+    fetchList: createRsaaActionTypes(resource + '_LIST'),
+    fetchDetails: createRsaaActionTypes(resource + '_DETAILS'),
+    update: createRsaaActionTypes('UPDATE_' + resource),
+    delete: createRsaaActionTypes('DELETE' + resource)
   };
 }
 
@@ -25,7 +25,7 @@ export function createCrudActionTypes (resource) {
  */
 export function createCrudActionCreators (resource, endpoint, actionTypes) {
   const actionTypesAsRsaaArrays = {};
-  for (let action of actionTypes) {
+  for (let action in actionTypes) {
     actionTypesAsRsaaArrays[action] = actionTypesToRsaaArray(actionTypes[action]);
   }
   return {

@@ -1,15 +1,13 @@
 /**
  * This method takes the name of an action and create types suitable for an RSAA action creator
  * @param action The name of the action that is being performed
- * @param resource The resource the action is being performed on
  * @returns {{success: string, error: string, begin: string}}
  */
-export function createRsaaActionTypes (action, resource) {
-  const identifier = action + '_' + resource;
+export function createRsaaActionTypes (action) {
   return {
-    begin: 'FETCH_' + identifier + '_BEGIN',
-    success: 'FETCH_' + identifier + '_SUCCESS',
-    error: 'FETCH_' + identifier + '_ERROR'
+    begin: 'FETCH_' + action + '_BEGIN',
+    success: 'FETCH_' + action + '_SUCCESS',
+    error: 'FETCH_' + action + '_ERROR'
   };
 }
 
@@ -30,7 +28,7 @@ export function actionTypesToRsaaArray (types) {
 export function createRsaaReducer (actions) {
   const initialState = {
     isFetching: false,
-    error: null
+    error: false
   };
   return (state = initialState, action) => {
     switch (action) {

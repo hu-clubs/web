@@ -29,8 +29,7 @@ export function actionTypesToRsaaArray (types) {
   return [types.begin, types.success, types.error];
 }
 
-export function createCrudActionCreators (resource, endpoint) {
-  const actionTypes = createCrudActionTypes(resource);
+export function createCrudActionCreators (resource, endpoint, actionTypes) {
   return {
     create: (attributes) => {
       return {

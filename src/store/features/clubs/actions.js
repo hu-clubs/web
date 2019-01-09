@@ -1,7 +1,7 @@
 import {createCrudActionCreators, createCrudActionTypes} from '../../utils/crud/actions';
 
 export const actionTypes = createCrudActionTypes('CLUB');
-const actions = createCrudActionCreators('CLUB', '/api/clubs/');
+const actions = createCrudActionCreators('CLUB', '/api/clubs/', actionTypes);
 
 export function createClub (name, shortName) {
   return actions.create({name, shortName});

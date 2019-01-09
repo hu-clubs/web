@@ -1,9 +1,85 @@
-export function createCrudReducerInitialStates () {
+export function createCrudReducers (actions) {
   return {
-    read: {
-      isFetching: false,
-      error: null,
-      items: {}
+    create: createRsaaReducer(actions.create),
+    read: createReadReducer(actions.fetchList, actions.fetchDetails),
+    update: createRsaaReducer(actions.update),
+    delete: createRsaaReducer(actions.delete)
+  };
+}
+
+function createReadReducer (fetchListActions, fetchDetailsActions) {
+  const initialState = {
+    isFetching: false,
+    error: null,
+    items: {}
+  };
+  return (state = initialState, action) => {
+    switch (action) {
+      case fetchListActions.begin:
+        return {
+          ...state,
+          isFetching: true,
+          error: null
+        };
+      case fetchListActions.success:
+        const response = action.payload;
+        const items = response.reduce((list, entry) => {
+          list[entry._id] = {
+            data: entry
+          };
+          return list;
+        }, {});
+        return {
+          ...state,
+          items,
+          isFetching: false,
+          error: null
+        };
+      case fetchListActions.error:
+        return {
+          ...state,
+          isFetching: false,
+          error: action.payload
+        };
+      case fetchDetailsActions.begin:
+        return {
+          ...state,
+          items: {
+            ...state.items,
+            [action.id]: {
+              ...state.items[action.id],
+              isFetching: true,
+              error: null
+            }
+          }
+        };
+      case fetchDetailsActions.success:
+        return {
+          ...state,
+          items: {
+            ...state.items,
+            [action.id]: {
+              ...state.items[action.id],
+              data: action.payload,
+              isFetching: false,
+              error: null
+            }
+          }
+        };
+      case fetchDetailsActions.error:
+        return {
+          ...state,
+          items: {
+            ...state.items,
+            [action.id]: {
+              ...state.items[action.id],
+              isFetching: false,
+              error: action.payload
+            }
+          }
+        };
+      default:
+        return state;
     }
   };
 }
@@ -38,84 +114,5 @@ export function createRsaaReducer (actions) {
       default:
         return state;
     }
-  };
-}
-
-// TODO split this method up
-export function createCrudReducers (actions) {
-  const initialStates = createCrudReducerInitialStates();
-  return {
-    create: createRsaaReducer(actions.create),
-    read: (state = initialStates.read, action) => {
-      switch (action) {
-        case actions.fetchList.begin:
-          return {
-            ...state,
-            isFetching: true,
-            error: null
-          };
-        case actions.fetchList.success:
-          const response = action.payload;
-          const items = response.reduce((list, entry) => {
-            list[entry._id] = {
-              data: entry
-            };
-            return list;
-          }, {});
-          return {
-            ...state,
-            items,
-            isFetching: false,
-            error: null
-          };
-        case actions.fetchList.error:
-          return {
-            ...state,
-            isFetching: false,
-            error: action.payload
-          };
-        case actions.fetchDetails.begin:
-          return {
-            ...state,
-            items: {
-              ...state.items,
-              [action.id]: {
-                ...state.items[action.id],
-                isFetching: true,
-                error: null
-              }
-            }
-          };
-        case actions.fetchDetails.success:
-          return {
-            ...state,
-            items: {
-              ...state.items,
-              [action.id]: {
-                ...state.items[action.id],
-                data: action.payload,
-                isFetching: false,
-                error: null
-              }
-            }
-          };
-        case actions.fetchDetails.error:
-          return {
-            ...state,
-            items: {
-              ...state.items,
-              [action.id]: {
-                ...state.items[action.id],
-                isFetching: false,
-                error: action.payload
-              }
-            }
-          };
-        default:
-          return state;
-      }
-    },
-    update: createRsaaReducer(actions.update),
-    delete: createRsaaReducer(actions.delete)
   };
 }

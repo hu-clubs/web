@@ -9,7 +9,7 @@ export const jwtMiddleware = ({getState}) => next => action => {
         [RSAA]: {
           ...action[RSAA],
           headers: {
-            ...action.headers,
+            ...action[RSAA].headers,
             'Authorization': 'Bearer ' + jwt
           }
         }
